@@ -1,0 +1,161 @@
+﻿<Window x:Class="PorchtaRissiiDesign1._0.Wwindows.PhoneBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PorchtaRissiiDesign1._0.Wwindows"
+        mc:Ignorable="d"
+        
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Height="320" Width="500"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Border CornerRadius="8" BorderThickness="3" BorderBrush="#FF0055A5" >
+        <Border.Background>
+            <RadialGradientBrush RadiusX="1" RadiusY="1" GradientOrigin="0.5,0.5" Center="0.5,0.5" MappingMode="RelativeToBoundingBox">
+                <GradientStop Color="#FF0055A5" Offset="0.95"/>
+                <GradientStop Color="White" Offset="0.45"/>
+            </RadialGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="ТЕЛЕФОННАЯ КНИГА" Grid.Column="1" Grid.Row="0"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Style="{StaticResource TBlockPostStyle}" Foreground="Black" 
+                       MouseDown="DragMove_MousedounLogo"/>
+            <Border  Grid.Row="1" Grid.Column="1" Margin="5"
+                     BorderThickness="2" BorderBrush="#FF0055A5" >
+                <ListView  x:Name="ListViewPhoneBook" Background="Transparent" ItemsSource="{Binding PhoneBooks}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="160"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="/Resusce/office-building.png" 
+                                       Height="50" Width="50"
+                                       Grid.Column="0" Grid.RowSpan="2"/>
+
+                                <TextBlock Text="{Binding NameOrganisation}" Grid.Column="1"
+                                           HorizontalAlignment="Left" VerticalAlignment="Top"
+                                           FontWeight="Bold" FontSize="16"/>
+                                <StackPanel Grid.Column="1" Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Телефон1=" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Phone1}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Телефон2=" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Phone2}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Телефон3=" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Phone3}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Grid.Row="1">
+                                    <TextBlock Text="Адрес:" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Address}"
+                                           HorizontalAlignment="Right"/>
+                                </StackPanel>
+                              
+
+
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+            <StackPanel Orientation="Horizontal"   Grid.ColumnSpan="3" 
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Border x:Name="MinimizeBorder" CornerRadius="20" MouseDown="MinimizeImage_MouseDown"  >
+                    <Image  Margin="8 " Source="/Resusce/Minizide.png" Width="15" Height="15"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinimizeBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <Border x:Name="ExitBorder" CornerRadius="20" MouseDown="CloseImage_MouseDown">
+                    <Image Margin="8" Source="/Resusce/close.png"  Width="15" Height="15"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver , ElementName=ExitBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                         Width="50" Height="50"  Margin="5" MouseDown="DeleteImage_MouseDouwn"
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="DeleteIcon" Source="/Resusce/garbage.png" Margin="5"/>
+                </Border>
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewObjBorder_MouseDown" >
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="AddIcon" Source="/Resusce/add-file.png" Margin="5"/>
+                </Border>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+
+</Window>

@@ -1,0 +1,191 @@
+﻿<Window x:Class="PorchtaRissiiDesign1._0.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PorchtaRissiiDesign1._0"
+        mc:Ignorable="d"
+        Title="RegistrationWindow"
+        Height="650" 
+        Width="450"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+       AllowsTransparency="True"
+        Background="Transparent">
+    <Window.Resources>
+        <Style x:Key="BtnBlueStyle" TargetType="Button">
+            <Setter Property="Background" Value="#001489"/>
+            <Setter Property="FontFamily" Value="HelveticaNeueCyr"/>
+
+        </Style>
+        <Style x:Key="TbPostStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="HelveticaNeueCyr"/>
+
+        </Style>
+   
+       
+    </Window.Resources>
+    <Border Background="White" CornerRadius="8">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Image Source="/Resusce/PochtaLogo.png" Margin="0 25 0 0" Grid.Row="0" Grid.Column="1" MouseDown="Image_MouseDown" />
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" >
+            <TextBlock  Style="{StaticResource TbPostStyle}" 
+                        Text="Регистрация" FontWeight="Bold"
+                        FontSize="36"  Grid.Column="1" Grid.Row="1"
+                        HorizontalAlignment="Center" VerticalAlignment="Top"  />
+            
+            <TextBox  x:Name="TextBoxName" 
+                        VerticalAlignment="Top"
+                        Style="{StaticResource TBoxPostStyle}"
+                        Margin="15"/>
+
+            <TextBox x:Name="TextBoxLogin" 
+                        VerticalAlignment="Top" 
+                        Style="{StaticResource TBoxPostStyle}"
+                        Margin="15"/>
+            <PasswordBox x:Name="TextBoxPassword" Grid.Row="1" Grid.Column="1" 
+                        VerticalAlignment="Top"
+                        Style="{StaticResource PBoxPostStyle}"
+                        Margin='15'
+                        PasswordChanged="PasswordBox_PasswordChanged"/>
+            <PasswordBox x:Name="TextBoxPasswordRep" Grid.Row="1" Grid.Column="1" 
+                        VerticalAlignment="Top"
+                        Style="{StaticResource PBoxPostStyle}"
+                        Margin='15'
+                        PasswordChanged="ReapeatPaswordChanget"/>
+
+
+            <Button Margin="20 5 20 15"  Content="Регистрация"
+                    FontFamily="HelveticaNeueCyr" FontSize="26"
+                    Background="#FF0055A5" Foreground="White"
+                    Click="BtnRegistration"/>
+
+
+        </StackPanel>
+
+     
+
+        <TextBlock x:Name="TextBlockLogin" Text="Логин" FontFamily="HelveticaNeueCyr" 
+                   Grid.Row="1" Grid.Column="1" 
+                   FontSize="28" Foreground="#FF676767"
+                   Margin="34 123 100 90"
+                   IsHitTestVisible="False">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=TextBoxLogin}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <TextBlock x:Name="TextBlockPassword" Text="Пароль"
+                   FontFamily="HelveticaNeueCyr" 
+                   Grid.Row="1" Grid.Column="1" 
+                   FontSize="28" Foreground="#FF676767"
+                   Margin="34 188 100 60"
+                   IsHitTestVisible="False"/>
+
+        <TextBlock x:Name="TextBlockName" Text="Имя"
+                   FontFamily="HelveticaNeueCyr" 
+                   Grid.Row="1" Grid.Column="1" 
+                   FontSize="28" Foreground="#FF676767"
+                   Margin="34 59 100 200"
+                   IsHitTestVisible="False">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=TextBoxName}"
+                                     Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock x:Name="TextBlockPasswordRep" Text="Повторите пароль"
+                   FontFamily="HelveticaNeueCyr" 
+                   Grid.Row="1" Grid.Column="1" 
+                   FontSize="28" Foreground="#FF676767"
+                   Margin="34 253 10 15"
+                   IsHitTestVisible="False"/>
+
+
+
+        <TextBlock x:Name="TBlockBackToLogin" FontFamily="HelveticaNeueCyr" 
+                   Text="Вернуться" FontWeight="Light" FontSize="22"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                       Margin="0,15,0,20"  Grid.Column="1" Grid.Row="2" Background="Transparent"
+                       MouseDown="BackBlockCLick">
+            <TextBlock.Style>
+
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=TBlockBackToLogin}"
+                                     Value="true">
+                            <Setter Property="Foreground" Value="#FF945E3E"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+
+
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0"  
+                    VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Border x:Name="MinimizeBorder" CornerRadius="20"  MouseDown="MinimizeImage_MouseDown" >
+                <Image  Margin="8 " Source="/Resusce/Minizide.png" Width="20" Height="20"/>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinimizeBorder}"
+                                         Value="true">
+                                <Setter Property="Background" Value="#FF0055A5"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <Border x:Name="ExitBorder" CornerRadius="20" MouseDown="CloseImage_MouseDown"  >
+                <Image Margin="8" Source="/Resusce/close.png" Width="20" Height="20"/>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExitBorder}"
+                                         Value="true">
+                                <Setter Property="Background" Value="#FF0055A5"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+
+
+        </StackPanel>
+
+    </Grid>
+    </Border>
+</Window>

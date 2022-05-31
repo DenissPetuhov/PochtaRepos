@@ -1,0 +1,217 @@
+﻿<Window x:Class="PorchtaRissiiDesign1._0.Wwindows.BildingsForAdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PorchtaRissiiDesign1._0.Wwindows" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+        Height="950"
+        Width="1300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+        AllowsTransparency="True" Background="Transparent">
+    <Border Background="White" CornerRadius="8">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Image Source="/Resusce/LargeLogo.jpg"  
+               Margin="10 40 10 15" Grid.Column="2" Grid.ColumnSpan="4"
+               MouseDown="DragMove_MousedounLogo"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="0" VerticalAlignment="Top" Margin="3" HorizontalAlignment="Right">
+                <Border x:Name="MinimizeBorder" CornerRadius="20" MouseDown="MinimizeImage_MouseDown">
+                    <Image  Margin="8 " Source="/Resusce/Minizide.png" Width="20" Height="20"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinimizeBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <Border x:Name="ExitBorder" CornerRadius="20" MouseDown="CloseImage_MouseDown">
+                    <Image Margin="8" Source="/Resusce/close.png"  Width="20" Height="20"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver , ElementName=ExitBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </StackPanel>
+            <StackPanel  Grid.Column="2" Margin="5"
+                    Grid.Row="1">
+                <TextBlock Text="Дома" FontSize="16" Foreground="Black" HorizontalAlignment="Center" Style="{StaticResource TBlockPostStyle}"/>
+                <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4">
+                    <StackPanel>
+                        <TextBlock x:Name="TBlockFiltrHomes" Visibility="Visible" Text="Выберете участок" Margin="5 2" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <ComboBox x:Name="CboxFiltrHomes" Margin="5" Visibility="Visible"/>
+                        <TextBlock Text="Поиск" Margin="5 2" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}" />
+                        <TextBox Margin="5" FontSize="16" Width="170" />
+
+                    </StackPanel>
+
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Margin="5"
+                    Grid.Row="1" >
+                <TextBlock Text="Квартиры" FontSize="16" Foreground="Black" HorizontalAlignment="Center" Style="{StaticResource TBlockPostStyle}"/>
+                <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4" >
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="5 2" FontSize="16" Style="{StaticResource TBlockPostStyle}" Foreground="Black" Text="Сортировка"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Margin="5"  />
+                        <ComboBox Margin="5"/>
+                         
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+          
+            <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
+                    Grid.Column="2" Margin="5"
+                    Grid.Row="2">
+                <ListView ItemsSource="{Binding }" Margin="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                               
+                                
+                                
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+               
+            </Border>
+            <StackPanel x:Name="RedacktHomesStackPanel" Grid.Column="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                         Width="50" Height="50"  Margin="5" MouseDown="DeleteHomeImage_MouseDouwn"
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="DeleteIcon" Source="/Resusce/garbage.png" Margin="5"/>
+                </Border>
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewHomeObjBorder_MouseDown" >
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="AddIcon" Source="/Resusce/add-file.png" Margin="5"/>
+                </Border>
+            </StackPanel>
+            <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
+                    Grid.Column="3" Margin="5"
+                    Grid.Row="2">
+            
+            </Border>
+            <StackPanel x:Name="RedacktApartStackPanel" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                         Width="50" Height="50"  Margin="5" MouseDown="DeleteApartImage_MouseDouwn2"
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon2}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="DeleteIcon2" Source="/Resusce/garbage.png" Margin="5"/>
+                </Border>
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewApartObjBorder_MouseDown2" >
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon2}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="AddIcon2" Source="/Resusce/add-file.png" Margin="5"/>
+                </Border>
+            </StackPanel>
+
+            <Grid  Grid.RowSpan="3"  Grid.Row="0" Grid.ColumnSpan="2" >
+                   
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
+                    Grid.Column="0" Margin="15 40 15 2" Height="100" >
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Margin="5 2" Text="Информация о жильце:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <TextBlock  Margin="5 2" Text="Выбериет квартиру" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                    </StackPanel>
+                    
+                       
+              
+                   </Border>
+                <Border Margin="15 3 15 5"  BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4" Grid.Row="2" >
+                    <wv2:WebView2 Name="WebView" Margin="5"
+                              Source="https://2gis.ru/smolensk"/>
+                        
+                </Border>
+                </Grid>
+           
+        </Grid>
+    </Border>
+</Window>

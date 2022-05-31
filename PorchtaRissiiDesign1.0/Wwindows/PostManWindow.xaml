@@ -1,0 +1,146 @@
+﻿<Window x:Class="PorchtaRissiiDesign1._0.Wwindows.PostmanWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PorchtaRissiiDesign1._0.Wwindows"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+        Title="PostmanWindow"
+        Height="800" Width="1600"
+        AllowsTransparency="True"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner">
+    <Border Background="White" 
+            CornerRadius="8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Resusce/PochtaLogo.png"  Margin="15" 
+                   Grid.Row="0" Grid.Column="0"
+                   MouseDown="Image_MouseDown" />
+            <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  Margin="0 15 0 0">
+                <Border BorderBrush="#FF0055A5" BorderThickness="3">
+                    <wv2:WebView2 Name="WebView" 
+                              Source="https://2gis.ru/smolensk/search/магнит?m=32.126502%2C54.792383%2F12.61"/>
+                </Border>
+
+            </DockPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Border x:Name="MinimizeBorder" CornerRadius="20" MouseDown="MinimizeImage_MouseDown">
+                    <Image  Margin="8 " Source="/Resusce/Minizide.png" Width="20" Height="20"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinimizeBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <Border x:Name="ExitBorder" CornerRadius="20" MouseDown="CloseImage_MouseDown">
+                    <Image Margin="8" Source="/Resusce/close.png"  Width="20" Height="20"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver , ElementName=ExitBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="5 205" Text="Список Домов" 
+                       FontSize="25" FontFamily="HelveticaNeueCyr" FontWeight="Bold"
+                       VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" 
+                    BorderBrush="#FF0055A5" BorderThickness="4" Margin="5 30 5 5">
+
+
+                <ListView Margin="3" 
+                          ItemsSource="{Binding Buildings}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Resusce/Bulding.png" 
+                                           Width="50" Height="50" Margin="10" 
+                                          Grid.Column="0" />
+                                <StackPanel Orientation="Vertical" Margin="5" 
+                                                Grid.Column="1" Width="auto">
+
+                                    <TextBlock Text="{Binding NumberBuilding}" FontSize="22" FontWeight="Bold" 
+                                               VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding DoorwayCount}" />
+                                    <Button Style="{StaticResource BtnBlueStyle}"
+                                            Content="Показать" 
+                                            VerticalAlignment="Top" HorizontalAlignment="Center"
+                                            Width="120" Height="25"
+                                            />
+
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </Border>
+            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.RowSpan="3" Margin="5 50 5 15" >
+                <Border BorderBrush="#FF0055A5" BorderThickness="2" >
+                    <ListView ItemsSource="{Binding paymentHumen}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resusce/PaymantHuman.png"
+                                               Width="50" Height="50" Margin="10" 
+                                               />
+                                    <StackPanel Orientation="Vertical" Margin="5"
+                                                Grid.Column="1" >
+                                        <TextBlock Text="{Binding Name}" Margin="15" Style="{StaticResource TBlockPostStyle}" Foreground="#FF0055A5"/>
+                                        <TextBlock Text="{Binding Discript}" Margin="15" Style="{StaticResource TBlockPostStyle}" Foreground="#FF0055A5"/>
+                                        <Button Style="{StaticResource BtnBlueStyle}"
+                                            Content="Показать" 
+                                            VerticalAlignment="Top" HorizontalAlignment="Center"
+                                            Width="120" Height="25"
+                                            />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        
+                    </ListView>
+                </Border>
+            </StackPanel>
+            <Button Grid.Row="2" Grid.Column="1"
+                     Width="40" Height="40" Content="Нажми" Click="Button_Click"/>
+
+        </Grid>
+    </Border>
+</Window>

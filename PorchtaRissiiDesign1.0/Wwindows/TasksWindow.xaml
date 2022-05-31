@@ -1,0 +1,200 @@
+﻿<Window x:Class="PorchtaRissiiDesign1._0.Wwindows.TasksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PorchtaRissiiDesign1._0.Wwindows"
+        xmlns:_0="clr-namespace:PorchtaRissiiDesign1._0.Utils"
+        mc:Ignorable="d"
+        Title="TasksWindow" 
+        Height="500" Width="400"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <_0:VisibleConverterInvert x:Key="VisibilityConverter"></_0:VisibleConverterInvert>
+    </Window.Resources>
+    <Border CornerRadius="8" BorderThickness="3" BorderBrush="#FF0055A5"  >
+
+        <Border.Background>
+            <RadialGradientBrush RadiusX="1" RadiusY="1" GradientOrigin="0.5,0.5" Center="0.5,0.5" MappingMode="RelativeToBoundingBox">
+                <GradientStop Color="#FF0055A5" Offset="0.977"/>
+                <GradientStop Color="White" Offset="0.543"/>
+            </RadialGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Border Background="Transparent" Grid.Column="1" Grid.Row="0" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
+            <Border BorderBrush="#FF0055A5" BorderThickness="3" CornerRadius="2"
+                    Grid.Column="1" Grid.Row="1">
+                <ListView ItemsSource="{Binding Tasks}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition />
+                                        <RowDefinition Height="5"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image x:Name="asdadsfdass" Grid.Column="0" Grid.Row="1" Source="/Resusce/TaskIcon.png" Width="40" 
+                                           VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5"/>
+
+
+
+                                    <Button x:Name="TBlockTaskText"  Grid.Row="1" Grid.Column="1"   
+                                            Width="220" Margin="3" 
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Click="TBlockTaskText_Click"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Visibility="{Binding TextBoxVisibility, Converter={StaticResource VisibilityConverter}}">
+                                        <Button.Content>
+                                            <TextBlock Text="{Binding TextTask, UpdateSourceTrigger=PropertyChanged}"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                        </Button.Content>
+                                    </Button>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" Text="{Binding DateTask}" 
+                                               TextWrapping="Wrap" Width="60" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Right" 
+                                               />
+                                    <StackPanel Orientation="Horizontal"
+                                                Visibility="{Binding TextBoxVisibility}"
+                                                Width="220"
+                                                Grid.Row="1" Grid.Column="1" >
+                                        <TextBox x:Name="TBoxTaskText" Text="{Binding TextTask, UpdateSourceTrigger=PropertyChanged}" 
+                                             Width="110"
+                                             TextWrapping="Wrap" VerticalAlignment="Top" Margin="3"
+                                             />
+                                        <StackPanel>
+                                            <Image Source="/Resusce/confirmIcon.png" MouseLeftButtonDown="ConfirmRedactTextBox"  Width="15" Height="15"/>
+                                            <Image Source="/Resusce/CancelIcon.png" MouseLeftButtonDown="CanselIconTextBox"  Width="15" Height="15"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="12"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Column="0" Grid.Row="1" IsHitTestVisible="False"
+                   Source="/Resusce/PosrmanIcon.png"  
+                   HorizontalAlignment="Left"  />
+                <TextBlock  Grid.Column="0" Grid.Row="2" IsHitTestVisible="False" 
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                       Style="{StaticResource TBlockPostStyle}" Text="Почтальон" FontWeight="Bold" Foreground="Black" FontSize="14" />
+                <Grid Grid.Row="1" Grid.Column="1">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" >
+                        <TextBlock  IsHitTestVisible="False" Grid.Column="1" Grid.Row="1" Style="{StaticResource TBlockPostStyle}"
+                        Text="{Binding Postman.FirstName}" Foreground="Black" FontSize="16" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3"/>
+                        <TextBlock Style="{StaticResource TBlockPostStyle}" IsHitTestVisible="False" Text="{Binding Postman.Name}" 
+                        Foreground="Black" FontSize="16"  Margin="3" />
+                        <TextBlock Style="{StaticResource TBlockPostStyle}" IsHitTestVisible="False"  Text="{Binding Postman.MiddleName}"
+                        Foreground="Black" FontSize="16"  Margin="3"  />
+                    </StackPanel>
+                    <TextBlock Grid.Row="2" Grid.Column="0" IsHitTestVisible="False"
+                       Text="{Binding Postman.Phone}" Margin="3" Style="{StaticResource TBlockPostStyle}"
+                       Foreground="Black" FontSize="16" HorizontalAlignment="Left" />
+                    <TextBlock Grid.Row="3"  Text="{Binding Postman.ResAdress}" 
+                               FontSize="16" FontFamily="HelveticaNeueCyr" Margin="3"/>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal">
+                        <TextBlock Text="Возвраст:" FontFamily="HelveticaNeueCyr" Margin="3" FontSize="16"/>
+                        <TextBlock Text="{Binding Postman.Age}" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="3"/>
+                    </StackPanel>
+                </Grid>
+
+
+            </Grid>
+            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                         Width="50" Height="50"  Margin="5"
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Image Source="/Resusce/garbage.png" Margin="5"/>
+                </Border>
+                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
+                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Image Source="/Resusce/add-file.png" Margin="5"/>
+                </Border>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal"   Grid.ColumnSpan="3" 
+                        VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Border x:Name="MinimizeBorder" CornerRadius="20" MouseDown="MinimizeImage_MouseDown"  >
+                    <Image  Margin="8 " Source="/Resusce/Minizide.png" Width="15" Height="15"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinimizeBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <Border x:Name="ExitBorder" CornerRadius="20" MouseDown="CloseImage_MouseDown">
+                    <Image Margin="8" Source="/Resusce/close.png"  Width="15" Height="15"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver , ElementName=ExitBorder}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+
+            </StackPanel>
+        </Grid>
+
+    </Border>
+
+
+</Window>
