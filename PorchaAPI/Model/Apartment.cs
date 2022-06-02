@@ -19,7 +19,7 @@ namespace PorchaAPI
         public int? IdStatusBox { get; set; }
         public string Discript { get; set; }
         public int? IdBuilding { get; set; }
-        public int? DoorwarNumber { get; set; }
+    
 
        
         public virtual Building IdBuildingNavigation { get; set; }

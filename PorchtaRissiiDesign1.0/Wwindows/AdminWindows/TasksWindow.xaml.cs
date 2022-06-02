@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using static PorchtaRissiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для TasksWindow.xaml
@@ -36,8 +36,8 @@ namespace PorchtaRissiiDesign1._0.Wwindows
             }
         }
         public User Postman { get; }
-        private List<PorchaAPI.Task> _tasks { get; set; }
-        public List<PorchaAPI.Task> Tasks { get => _tasks; set { _tasks = value; OnPropertyChanged(); } }
+        private List<PorchaAPI.Task> tasks { get; set; }
+        public List<PorchaAPI.Task> Tasks { get => tasks; set { tasks = value; OnPropertyChanged(); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string s = null)

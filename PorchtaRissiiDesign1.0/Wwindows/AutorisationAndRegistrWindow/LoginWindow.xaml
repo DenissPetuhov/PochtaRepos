@@ -1,4 +1,4 @@
-﻿<Window x:Class="PorchtaRissiiDesign1._0.LoginWindow"
+﻿<Window x:Class="PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

@@ -47,7 +47,7 @@ namespace PorchaAPI.Controllers
             {
                 return await db.PhoneBooks.ToListAsync();
             }
-            catch (System.Exception r)
+            catch (System.Exception)
             {
                 return null;
             }
@@ -71,7 +71,7 @@ namespace PorchaAPI.Controllers
         [HttpGet("Payments")]
         public async Task<List<Payment>> GetPaymentList()
         {
-            return await db.Payments.ToListAsync();
+            return await db.Payments.Include(x => x.IdHumanNavigation.IdApartamentNavigation.IdBuildingNavigation.IdRegionNavigation.Users).ToListAsync();
         }
 
         [HttpGet]
@@ -105,16 +105,12 @@ namespace PorchaAPI.Controllers
         [HttpPut("ChangeTask")]
         public async Task<bool> PutTask([FromBody] Task task)
         {
-            try
-            {
+         
+           
                 db.Tasks.Update(task);
                 await db.SaveChangesAsync();
                 return true;
-            }
-            catch (System.Exception e)
-            {
-                return false;
-            }
+         
         }
 
         [HttpPost("AddNewPhoneBook")]

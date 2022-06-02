@@ -49,9 +49,9 @@ namespace PorchtaRissiiDesign1._0
                 var isSuccess = JsonConvert.DeserializeObject<T>(responseContent);
                 return isSuccess;
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                return default(T);
+                return default;
             }
         }
     }

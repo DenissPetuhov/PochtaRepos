@@ -13,14 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace PorchtaRissiiDesign1._0.Wwindows
 {
     /// <summary>
     /// Логика взаимодействия для BildingsForAdminWindow.xaml
     /// </summary>
-    public partial class BildingsForAdminWindow : Window
+    public partial class BildingsWindow : Window
     {
-        public BildingsForAdminWindow(User user)
+        public BildingsWindow(User user)
         {
             Useres = user;
             InitializeComponent();

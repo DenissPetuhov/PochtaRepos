@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -26,6 +27,7 @@ namespace PorchaAPI
 
         public virtual Region IdRegionNavigation { get; set; }
         public virtual Role IdRoleNavigation { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Task> Tasks { get; set; }
     }
 }

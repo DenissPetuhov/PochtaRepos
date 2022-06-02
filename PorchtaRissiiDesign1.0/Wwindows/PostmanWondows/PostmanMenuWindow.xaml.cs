@@ -1,4 +1,5 @@
 ﻿using PorchaAPI;
+using PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static PorchtaRissiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
 {
     /// <summary>
     /// Логика взаимодействия для PostmanMenuWindow.xaml
@@ -68,7 +69,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows
             set { task = value; OnPropertyChanged(); }
         }
 
-       
+
         private void DragMove_MousedounLogo(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -83,7 +84,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows
 
         private void BIldingsIcons_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            BildingsForAdminWindow BFA = new BildingsForAdminWindow(Postman);
+            BildingsWindow BFA = new BildingsWindow(Postman);
             BFA.Show();
         }
 
@@ -96,7 +97,8 @@ namespace PorchtaRissiiDesign1._0.Wwindows
 
         private void CLick_PaymentHumanIcon(object sender, MouseButtonEventArgs e)
         {
-
+            PaymentForPostmanWindow PFPW = new PaymentForPostmanWindow(Postman);
+            PFPW.Show();
         }
     }
 }

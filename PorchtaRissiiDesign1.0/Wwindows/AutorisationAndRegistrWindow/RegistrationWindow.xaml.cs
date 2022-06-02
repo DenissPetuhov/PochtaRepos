@@ -5,7 +5,7 @@ using PorchaAPI;
 using PorchtaRissiiDesign1._0.Utils;
 using static PorchtaRissiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0
+namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
 {
     /// <summary>
     /// Логика взаимодействия для RegistrationWindow.xaml

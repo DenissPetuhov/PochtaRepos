@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -18,7 +19,9 @@ namespace PorchaAPI
         public int? Sqare { get; set; }
         public string Discript { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Building> Buildings { get; set; }
+    
         public virtual ICollection<User> Users { get; set; }
     }
 }

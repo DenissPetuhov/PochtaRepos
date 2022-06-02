@@ -92,11 +92,11 @@
     <Compile Include="Utils\BilletCounter.cs" />
     <Compile Include="Utils\UserCredentialValidator.cs" />
     <Compile Include="Utils\VisibleConverterInvert.cs" />
-    <Compile Include="Wwindows\AdminWindow.xaml.cs">
+    <Compile Include="Wwindows\AdminWindows\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\BildingsForAdminWindow.xaml.cs">
-      <DependentUpon>BildingsForAdminWindow.xaml</DependentUpon>
+    <Compile Include="Wwindows\BildingsWindow.xaml.cs">
+      <DependentUpon>BildingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wwindows\CalcWindow.xaml.cs">
       <DependentUpon>CalcWindow.xaml</DependentUpon>
@@ -114,35 +114,32 @@
     <Compile Include="Wwindows\PageRedakt\AddNewPBPage.xaml.cs">
       <DependentUpon>AddNewPBPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\PaymentForPostmanWindow.xaml.cs">
+    <Compile Include="Wwindows\PostmanWondows\PaymentForPostmanWindow.xaml.cs">
       <DependentUpon>PaymentForPostmanWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\PayMentWindow.xaml.cs">
+    <Compile Include="Wwindows\AdminWindows\PayMentWindow.xaml.cs">
       <DependentUpon>PayMentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\PhoneBookWindow.xaml.cs">
+    <Compile Include="Wwindows\AdminWindows\PhoneBookWindow.xaml.cs">
       <DependentUpon>PhoneBookWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\PostmanMenuWindow.xaml.cs">
+    <Compile Include="Wwindows\PostmanWondows\PostmanMenuWindow.xaml.cs">
       <DependentUpon>PostmanMenuWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\PostManWindow.xaml.cs">
-      <DependentUpon>PostManWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wwindows\RegistrationWindow.xaml.cs">
+    <Compile Include="Wwindows\AutorisationAndRegistrWindow\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wwindows\RedaktWindow.xaml.cs">
       <DependentUpon>RedaktWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wwindows\TasksWindow.xaml.cs">
+    <Compile Include="Wwindows\AdminWindows\TasksWindow.xaml.cs">
       <DependentUpon>TasksWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Wwindows\AdminWindow.xaml">
+    <Page Include="Wwindows\AdminWindows\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\BildingsForAdminWindow.xaml">
+    <Page Include="Wwindows\BildingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,7 +147,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\LoginWindow.xaml">
+    <Page Include="Wwindows\AutorisationAndRegistrWindow\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -158,7 +155,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wwindows\LoginWindow.xaml.cs">
+    <Compile Include="Wwindows\AutorisationAndRegistrWindow\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -178,27 +175,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\PaymentForPostmanWindow.xaml">
+    <Page Include="Wwindows\PostmanWondows\PaymentForPostmanWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\PayMentWindow.xaml">
+    <Page Include="Wwindows\AdminWindows\PayMentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\PhoneBookWindow.xaml">
+    <Page Include="Wwindows\AdminWindows\PhoneBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\PostmanMenuWindow.xaml">
+    <Page Include="Wwindows\PostmanWondows\PostmanMenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\PostManWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wwindows\RegistrationWindow.xaml">
+    <Page Include="Wwindows\AutorisationAndRegistrWindow\RegistrationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,7 +199,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wwindows\TasksWindow.xaml">
+    <Page Include="Wwindows\AdminWindows\TasksWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,7 +291,9 @@
   <ItemGroup>
     <Resource Include="Resusce\Back-arrow.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resusce\refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

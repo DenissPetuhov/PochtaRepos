@@ -11,7 +11,7 @@ using System.Windows.Input;
 using static PorchtaRissiiDesign1._0.App;
 
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для PayMentWindow.xaml
@@ -33,16 +33,9 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         }
 
         private List<PaymentHuman> _paymentHuman;
-
-
-
         public List<PaymentHuman> PaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
-
-
         public List<PaymentHuman> FiltredPaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
-
         private List<Payment> payments;
-
         public List<Payment> AllPaymens
         {
             get { return payments; }
@@ -50,7 +43,6 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         }
         private List<Payment> fpayments;
         public List<Payment> FiltredPayments { get => fpayments; set { fpayments = value; OnPropertyChanged(); } }
-
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string s = null)
         {
@@ -64,8 +56,8 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         {
             this.Close();
         }
-        public PaymentHuman item ;
-        private  void MouseDoubleCLikPaymaentHuman(object sender, MouseButtonEventArgs e)
+        public PaymentHuman item;
+        private void MouseDoubleCLikPaymaentHuman(object sender, MouseButtonEventArgs e)
         {
             FiltredPayments = null;
             item = (PaymentHuman)PaymentHumanListView.SelectedValue;
@@ -76,8 +68,6 @@ namespace PorchtaRissiiDesign1._0.Wwindows
             ApartemetsTextBlock.Text = item.IdApartamentNavigation.Number.ToString();
             HomeTextBlock.Text = item.IdApartamentNavigation.IdBuildingNavigation.NumberBuilding.ToString();
         }
-
-
         public List<Payment> FiltrPay(PaymentHuman item)
         {
 
@@ -117,7 +107,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows
 
             AllAmount = sum1 + sum2 + sum3;
             TextBLockCountItog.Text = AllAmount.ToString();
-            double[] billAgrs = new double[8];
+            double[] billAgrs;
             billAgrs = BilletCounter.BillCounts(AllAmount); // Возарвщает масив от где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
             TBBill5k.Text = ((int)billAgrs[0]).ToString();
             TBBlii2k.Text = ((int)billAgrs[1]).ToString();
@@ -126,7 +116,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows
             TBBill200.Text = ((int)billAgrs[4]).ToString();
             TBBill100.Text = ((int)billAgrs[5]).ToString();
             TBBill50.Text = ((int)billAgrs[6]).ToString();
-            TBOSt.Text = Math.Round(billAgrs[7],2).ToString();
+            TBOSt.Text = Math.Round(billAgrs[7], 2).ToString();
         }
         private void DragMove_MousedounLogo(object sender, MouseButtonEventArgs e)
         {
@@ -135,43 +125,42 @@ namespace PorchtaRissiiDesign1._0.Wwindows
                 this.DragMove();
             }
         }
-
         public static async void AddNewPayments(Payment paymentCount)
         {
             await HttpRequest.PostAsync<bool>($"{adress}Home/addNewPayments", paymentCount);
-        } 
+        }
         private void SaveDataBtn_click(object sender, RoutedEventArgs e)
         {
-            if(AllAmount== 0){
+            if (AllAmount == 0)
+            {
                 MessageBox.Show("Выплатта не расичтана");
             }
-            else {        
-            Payment paymentCount = new Payment()
+            else
             {
-                IdHuman = item.Id,
-                Amount1 = ((decimal)sum1),
-                Amount2 = ((decimal)sum2),
-                Amount3 = ((decimal)sum3),
-                CountAmount = ((decimal)AllAmount),
-                CountBillTire1 = Convert.ToInt32(TBBill5k.Text),
-                CountBillTire2 = Convert.ToInt32(TBBlii2k.Text),
-                CountBillTire3 = Convert.ToInt32(TBBill1k.Text),
-                CountBillTire4 = Convert.ToInt32(TBBill500.Text),
-                CountBillTire5 = Convert.ToInt32(TBBill200.Text),
-                CountBillTire6 = Convert.ToInt32(TBBill100.Text),
-                CountBillTire7 = Convert.ToInt32(TBBill50.Text),
-                CountCoins = Convert.ToInt32(TBOSt.Text),
-                Date  = DateTime.Now,
-            };
-            AddNewPayments(paymentCount);
+                Payment paymentCount = new Payment()
+                {
+                    IdHuman = item.Id,
+                    Amount1 = ((decimal)sum1),
+                    Amount2 = ((decimal)sum2),
+                    Amount3 = ((decimal)sum3),
+                    CountAmount = ((decimal)AllAmount),
+                    CountBillTire1 = Convert.ToInt32(TBBill5k.Text),
+                    CountBillTire2 = Convert.ToInt32(TBBlii2k.Text),
+                    CountBillTire3 = Convert.ToInt32(TBBill1k.Text),
+                    CountBillTire4 = Convert.ToInt32(TBBill500.Text),
+                    CountBillTire5 = Convert.ToInt32(TBBill200.Text),
+                    CountBillTire6 = Convert.ToInt32(TBBill100.Text),
+                    CountBillTire7 = Convert.ToInt32(TBBill50.Text),
+                    CountCoins = Convert.ToInt32(TBOSt.Text),
+                    Date = DateTime.Now,
+                };
+                AddNewPayments(paymentCount);
             }
         }
-
         private void AddNewObjBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
         }
-
         private void DeleteImage_MouseDouwn(object sender, MouseButtonEventArgs e)
         {
 

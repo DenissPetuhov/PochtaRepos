@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using static PorchtaRissiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для PhoneBook.xaml
@@ -24,11 +24,11 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         public async void UpdateDate()
         {
             var list = await HttpRequest.GetAsync<List<PhoneBook>>($"{adress}Home/PhoneBook");
-            PhoneBooks = new ObservableCollection<PhoneBook>(list );
+            PhoneBooks = new ObservableCollection<PhoneBook>(list);
         }
-        private ObservableCollection<PhoneBook> _phoneBooks { get; set; }
+        private ObservableCollection<PhoneBook> phoneBooks { get; set; }
         
-        public ObservableCollection<PhoneBook> PhoneBooks { get => _phoneBooks; set { _phoneBooks = value; OnPropertyChanged(); } } 
+        public ObservableCollection<PhoneBook> PhoneBooks { get => phoneBooks; set { phoneBooks = value; OnPropertyChanged(); } } 
    
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string s = null)
@@ -65,7 +65,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows
                     await HttpRequest.DeleteAsync<PhoneBook>($"{adress}Home/DeletePhone.id={PB.Id}");
                     PhoneBooks.Remove(PB);
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     MessageBox.Show("Не кдалось удалить что то");
                 }
