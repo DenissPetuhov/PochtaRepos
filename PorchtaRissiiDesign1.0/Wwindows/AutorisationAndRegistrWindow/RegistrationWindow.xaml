@@ -33,7 +33,6 @@
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="4*"/>
@@ -128,27 +127,6 @@
                    FontSize="28" Foreground="#FF676767"
                    Margin="34 253 10 15"
                    IsHitTestVisible="False"/>
-
-
-
-            <TextBlock x:Name="TBlockBackToLogin" FontFamily="HelveticaNeueCyr" 
-                   Text="Вернуться" FontWeight="Light" FontSize="22"
-                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                       Margin="0,15,0,20"  Grid.Column="1" Grid.Row="2" Background="Transparent"
-                       MouseDown="BackBlockCLick">
-                <TextBlock.Style>
-
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=TBlockBackToLogin}"
-                                     Value="true">
-                                <Setter Property="Foreground" Value="#FF945E3E"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
 
 
 

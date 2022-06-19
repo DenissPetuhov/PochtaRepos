@@ -1,5 +1,4 @@
-﻿using PorchtaRissiiDesign1._0.Wwindows.PageRedakt;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static PorchtaRissiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
-    /// Логика взаимодействия для RedaktWindow.xaml
+    /// Логика взаимодействия для CreateAndRedactRegionWindow.xaml
     /// </summary>
-    public partial class RedaktWindow : Window
+    public partial class CreateAndRedactRegionWindow : Window
     {
-        public RedaktWindow(Page page)
+        public CreateAndRedactRegionWindow()
         {
-            InitializeComponent(); 
-            FrameRedaktWindowNavigate.Navigate(page);
+            InitializeComponent();
         }
-
         private void MinimizeImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -34,6 +32,13 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         private void CloseImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+        private void DragMove_MousedounLogo(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
     }
 }

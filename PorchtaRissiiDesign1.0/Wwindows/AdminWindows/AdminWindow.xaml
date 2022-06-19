@@ -63,7 +63,7 @@
                            Margin="5 5 5 0" />
                     </StackPanel>
                     <ListView Margin="3 5 3 0"
-                           Height="500"
+                           Height="490"
                           ItemsSource="{Binding Postmans}"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                               HorizontalContentAlignment="Stretch">
@@ -103,6 +103,26 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    
+                    <TextBlock x:Name="TBlockREgistration" FontFamily="HelveticaNeueCyr" 
+                   Text="Регистрация нового почтальона" FontWeight="Light" FontSize="16"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" TextWrapping="Wrap"
+                       Margin="0,0,0,40"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="Transparent"
+                       MouseDown="RegistrationTBlock">
+                        <TextBlock.Style>
+
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=TBlockREgistration}"
+                                     Value="true">
+                                        <Setter Property="Foreground" Value="#FF945E3E"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    
                 </StackPanel>
             </Border>
             <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right">
@@ -179,26 +199,28 @@
                         <Image Source="/Resusce/office-building.png" />
                     </Border>
                 </StackPanel>
-         
-                <Border Margin="30 10" x:Name="PaymentHumanIcon" 
-                        Grid.Row="1"  Grid.RowSpan="3" CornerRadius="12" MouseDown="CLick_PaymentHumanIcon">
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
+               
+                    <Border Margin="3 45"  Grid.Row="1" x:Name="PaymentHumanIcon"  Width="135" 
+                          Grid.RowSpan="3" CornerRadius="12" MouseDown="CLick_PaymentHumanIcon">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background"
                                     Value="Transparent"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=PaymentHumanIcon}"
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=PaymentHumanIcon}"
                                          Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image Source="/Resusce/PayMentHuman.png" />
-                </Border>
-
+                                        <Setter Property="Background" Value="#FF0055A5"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Image Source="/Resusce/PayMentHuman.png" />
+                    </Border>
+               
 
             </Grid>
+
+        
         </Grid>
     </Border>
 

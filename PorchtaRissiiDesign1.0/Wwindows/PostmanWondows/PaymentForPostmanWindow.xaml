@@ -29,18 +29,13 @@
                        Margin="10 40 10 5" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0"
                         MouseDown="DragMove_MousedounLogo"/>
                 <TextBlock Grid.ColumnSpan="2" Grid.Row="0" 
-                       Text="Окно Расчета Вылпат" Margin="3"
+                       Text="Окно группирования выплат" Margin="3"
                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
                        FontSize="28" FontFamily="HelveticaNeueCyr"/>
             </StackPanel>
-
-
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="2" Grid.RowSpan="3" Margin="5 5 15 15"
                     Grid.Row="2" >
-
-
-
                 <ListView MouseDoubleClick="MouseDoubleCLikPaymaent" x:Name="PaymentListView" ItemsSource="{Binding Payments}" Margin="2"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -90,18 +85,28 @@
                 <ListView MouseDoubleClick="MouseDubleClick_SelectedPaymetsListView" ItemsSource="{Binding SelectedPayments}" Margin="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="40">
+                            <Grid Height="70">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Vertical" Grid.Column="0">
+                                    <TextBlock Text="{Binding IdHumanNavigation.IdApartamentNavigation.Number}"/>
+                                    <TextBlock Text="Квартира" FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12"/> 
                                     <StackPanel Margin="3" Orientation="Horizontal">
                                         <TextBlock Text="Дата:"/>
                                         <TextBlock Text="{Binding Date}"/>
                                     </StackPanel>
-                                    <TextBlock  Text="{Binding IdHumanNavigation.Name}" TextWrapping="Wrap"/>
-
+                                    <TextBlock Text="{Binding CountAmount}"/>
+                                    <StackPanel  Orientation="Horizontal">
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire1}"/>
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire2}"/>
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire3}"/>
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire4}"/>
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire5}"/>
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire6}"/>
+                                        <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire7}"/>
+                                    </StackPanel>
                                 </StackPanel>
                                </Grid>
                         </DataTemplate>

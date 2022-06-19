@@ -35,11 +35,7 @@ namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
                 this.DragMove();
             }
         }
-        private void BackBlockCLick(object sender, MouseButtonEventArgs e)
-        {
-            login.Show();
-            this.Close();
-        }
+   
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (TextBoxPassword.Password.Length > 0)
@@ -73,8 +69,6 @@ namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
                     await HttpRequest.PostAsync<User>($"{adress}Home/PostUser", userOjb);
                     
                     MessageBox.Show("Пользователь " + userOjb.Name + " успешно зарегистрирован!");
-                    LoginWindow login = new LoginWindow();
-                    login.Show();
                     this.Close();
 
                 }

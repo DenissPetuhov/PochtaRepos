@@ -14,5 +14,6 @@ namespace PorchtaRissiiDesign1._0
     public partial class App : Application
     {
         public static string adress = "https://192.168.0.52:5001/"; 
+    
     }
 }

@@ -36,8 +36,8 @@
             </Grid.RowDefinitions>
             <Border Background="Transparent" Grid.Column="1" Grid.Row="0" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
             <Border BorderBrush="#FF0055A5" BorderThickness="3" CornerRadius="2"
-                    Grid.Column="1" Grid.Row="1">
-                <ListView ItemsSource="{Binding Tasks}">
+                    Grid.Column="1" Grid.Row="1"  >
+                <ListView ItemsSource="{Binding Tasks}" x:Name="lvTastItem" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -81,7 +81,7 @@
                                                 Width="220"
                                                 Grid.Row="1" Grid.Column="1" >
                                         <TextBox x:Name="TBoxTaskText" Text="{Binding TextTask, UpdateSourceTrigger=PropertyChanged}" 
-                                             Width="110"
+                                             Width="190"
                                              TextWrapping="Wrap" VerticalAlignment="Top" Margin="3"
                                              />
                                         <StackPanel>
@@ -147,14 +147,39 @@
             </Grid>
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                         Width="50" Height="50"  Margin="5"
+                         Width="50" Height="50"  Margin="5" MouseDown="DeleteHomeImage_MouseDouwn"
                         VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Image Source="/Resusce/garbage.png" Margin="5"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="DeleteIcon" Source="/Resusce/garbage.png" Margin="5"/>
                 </Border>
                 <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
                         Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
-                        VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Image Source="/Resusce/add-file.png" Margin="5"/>
+                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewTaskBorder_MouseDown" >
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon}"
+                                         Value="true">
+                                    <Setter Property="Background" Value="#FF0055A5"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Image x:Name="AddIcon" Source="/Resusce/add-file.png" Margin="5"/>
                 </Border>
             </StackPanel>
 

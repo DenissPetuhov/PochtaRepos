@@ -26,6 +26,11 @@ namespace PorchaAPI.Controllers
         {
             return await db.Buildings.ToListAsync();
         }
+        [HttpGet("Apartaments")]
+        public async Task<List<Apartment>> GetApartaments()
+        {
+            return await db.Apartments.Include(x => x.IdBuildingNavigation).ToListAsync();
+        }
         [HttpPost("PostUser")]
         public async Task<int> PostUser([FromBody] User user)
         {
@@ -133,6 +138,30 @@ namespace PorchaAPI.Controllers
             await db.Payments.AddAsync(paymentCount);
             await db.SaveChangesAsync();
             return true;
+        }
+        [HttpPost("addNewTast")]
+        public async Task<bool> PostAddTask([FromBody] Task taks)
+        {
+            await db.Tasks.AddAsync(taks);
+            await db.SaveChangesAsync();
+            return true;
+        }
+
+        [HttpDelete("DeleteTask.id={id}")]
+        public async Task<IActionResult> PostDeleteTask([FromRoute] int? id)
+        {
+            if (id != null)
+            {
+                Task Ts = await db.Tasks.FirstOrDefaultAsync(p => p.Id == id);
+                if (Ts != null)
+                {
+                    db.Tasks.Remove(Ts);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+              
+            }
+            return NotFound();
         }
     }
 }

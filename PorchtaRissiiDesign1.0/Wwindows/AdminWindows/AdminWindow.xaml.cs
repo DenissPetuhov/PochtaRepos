@@ -102,5 +102,17 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
             BildingsWindow BFA = new BildingsWindow(Useres);
             BFA.Show();
         }
+
+        private void RegionsIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CreateAndRedactRegionWindow CARRW= new CreateAndRedactRegionWindow();
+            CARRW.Show();
+        }
+        private void RegistrationTBlock(object sender, MouseButtonEventArgs e)
+        {
+            RegistrationWindow Reg = new RegistrationWindow();
+            Reg.Show();
+            this.Close();
+        }
     }
 }

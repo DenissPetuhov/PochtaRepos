@@ -1,5 +1,6 @@
 ﻿using PorchaAPI;
 using PorchtaRissiiDesign1._0.Utils;
+using PorchtaRissiiDesign1._0.Wwindows.PageRedakt;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         private List<PaymentHuman> _paymentHuman;
         public List<PaymentHuman> PaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
         public List<PaymentHuman> FiltredPaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
+
         private List<Payment> payments;
         public List<Payment> AllPaymens
         {
@@ -43,6 +45,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         }
         private List<Payment> fpayments;
         public List<Payment> FiltredPayments { get => fpayments; set { fpayments = value; OnPropertyChanged(); } }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string s = null)
         {
@@ -56,40 +59,49 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         {
             this.Close();
         }
-        public PaymentHuman item;
+        public PaymentHuman paymentHumanSelectItem;
         private void MouseDoubleCLikPaymaentHuman(object sender, MouseButtonEventArgs e)
         {
             FiltredPayments = null;
-            item = (PaymentHuman)PaymentHumanListView.SelectedValue;
-            FiltredPayments = FiltrPay(item);
-            PhoneNumberTextBlock.Text = item.PhoneNumber.ToString();
-            NameTextBlock.Text = item.Name.ToString();
-            DiscriptionTextBLock.Text = item.Discript.ToString();
-            ApartemetsTextBlock.Text = item.IdApartamentNavigation.Number.ToString();
-            HomeTextBlock.Text = item.IdApartamentNavigation.IdBuildingNavigation.NumberBuilding.ToString();
+            paymentHumanSelectItem = (PaymentHuman)PaymentHumanListView.SelectedValue;
+
+            FiltredPayments = FiltrPay(paymentHumanSelectItem);
+            PhoneNumberTextBlock.Text = paymentHumanSelectItem.PhoneNumber.ToString();
+            NameTextBlock.Text = paymentHumanSelectItem.Name.ToString();
+            DiscriptionTextBLock.Text = paymentHumanSelectItem.Discript.ToString();
+            ApartemetsTextBlock.Text = paymentHumanSelectItem.IdApartamentNavigation.Number.ToString();
+            HomeTextBlock.Text = paymentHumanSelectItem.IdApartamentNavigation.IdBuildingNavigation.NumberBuilding.ToString();
         }
         public List<Payment> FiltrPay(PaymentHuman item)
         {
-
-            List<Payment> list = new List<Payment>();
-            list = AllPaymens.Where(x => x.IdHuman == item.Id).ToList();
-            return list;
+            try
+            {
+                List<Payment> list = new List<Payment>();
+                list = AllPaymens.Where(x => x.IdHuman == item.Id).ToList();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
-
+       
         private void MouseDubleClick_PaymetsListView(object sender, MouseButtonEventArgs e)
         {
-
+             //Payment PaymentSelectitem = (Payment)ListViewPayment.SelectedValue;
         }
-        public double sum1 = 0;
-        public double sum2 = 0;
-        public double sum3 = 0;
-        public double AllAmount;
+
+
+        public double sum1;
+        public double sum2;
+        public double sum3;
+        public double allAmount;
         private void SummCLickBtn(object sender, RoutedEventArgs e)
         {
             sum1 = 0;
             sum2 = 0;
             sum3 = 0;
-            AllAmount = 0;
+            allAmount = 0;
             if (TextBoxOneSumm.Text != "")
                 sum1 += Convert.ToDouble(TextBoxOneSumm.Text);
             else if (TextBoxTwoSumm.Text == "")
@@ -105,10 +117,10 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
             else if (TextBoxThreeSumm.Text == "")
                 sum3 = 0;
 
-            AllAmount = sum1 + sum2 + sum3;
-            TextBLockCountItog.Text = AllAmount.ToString();
+            allAmount = sum1 + sum2 + sum3;
+            TextBLockCountItog.Text = allAmount.ToString();
             double[] billAgrs;
-            billAgrs = BilletCounter.BillCounts(AllAmount); // Возарвщает масив от где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
+            billAgrs = BilletCounter.BillCounts(allAmount); // Возарвщает масив от где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
             TBBill5k.Text = ((int)billAgrs[0]).ToString();
             TBBlii2k.Text = ((int)billAgrs[1]).ToString();
             TBBill1k.Text = ((int)billAgrs[2]).ToString();
@@ -125,38 +137,49 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                 this.DragMove();
             }
         }
-        public static async void AddNewPayments(Payment paymentCount)
+
+        private async void SaveDataBtn_click(object sender, RoutedEventArgs e)
         {
-            await HttpRequest.PostAsync<bool>($"{adress}Home/addNewPayments", paymentCount);
-        }
-        private void SaveDataBtn_click(object sender, RoutedEventArgs e)
-        {
-            if (AllAmount == 0)
+            if (allAmount == 0)
             {
-                MessageBox.Show("Выплатта не расичтана");
+                MessageBox.Show("Выплата не расичтана");
             }
-            else
+            else if (paymentHumanSelectItem != null)
             {
-                Payment paymentCount = new Payment()
+                try
                 {
-                    IdHuman = item.Id,
-                    Amount1 = ((decimal)sum1),
-                    Amount2 = ((decimal)sum2),
-                    Amount3 = ((decimal)sum3),
-                    CountAmount = ((decimal)AllAmount),
-                    CountBillTire1 = Convert.ToInt32(TBBill5k.Text),
-                    CountBillTire2 = Convert.ToInt32(TBBlii2k.Text),
-                    CountBillTire3 = Convert.ToInt32(TBBill1k.Text),
-                    CountBillTire4 = Convert.ToInt32(TBBill500.Text),
-                    CountBillTire5 = Convert.ToInt32(TBBill200.Text),
-                    CountBillTire6 = Convert.ToInt32(TBBill100.Text),
-                    CountBillTire7 = Convert.ToInt32(TBBill50.Text),
-                    CountCoins = Convert.ToInt32(TBOSt.Text),
-                    Date = DateTime.Now,
-                };
-                AddNewPayments(paymentCount);
+                    Payment paymentCount = new Payment
+                    {
+                        IdHuman = paymentHumanSelectItem.Id,
+                        Amount1 = ((decimal)sum1),
+                        Amount2 = ((decimal)sum2),
+                        Amount3 = ((decimal)sum3),
+                        CountAmount = ((decimal)allAmount),
+                        CountBillTire1 = Convert.ToInt32(TBBill5k.Text),
+                        CountBillTire2 = Convert.ToInt32(TBBlii2k.Text),
+                        CountBillTire3 = Convert.ToInt32(TBBill1k.Text),
+                        CountBillTire4 = Convert.ToInt32(TBBill500.Text),
+                        CountBillTire5 = Convert.ToInt32(TBBill200.Text),
+                        CountBillTire6 = Convert.ToInt32(TBBill100.Text),
+                        CountBillTire7 = Convert.ToInt32(TBBill50.Text),
+                        CountCoins = Convert.ToDecimal(TBOSt.Text),
+                        Date = DateTime.Now,
+                    };
+
+                   
+                        await HttpRequest.PostAsync<bool>($"{adress}Home/addNewPayments", paymentCount);
+                        MessageBox.Show("успешно");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
             }
+            UpdateDate();
+            FiltredPayments = FiltrPay(paymentHumanSelectItem);
+
         }
+
         private void AddNewObjBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -164,6 +187,18 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         private void DeleteImage_MouseDouwn(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void DeletePaymentTextBox(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void DatePickerSelectPaymentsFiltr_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FiltredPayments = FiltrPay(paymentHumanSelectItem);
+            DateTime? date = DatePickerSelectPaymentsFiltr.SelectedDate;
+            FiltredPayments = FiltredPayments.Where(x => x.Date.Value.Date == date.Value.Date).ToList();
         }
     }
 }

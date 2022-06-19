@@ -28,14 +28,14 @@
                        Margin="10" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0"
                         MouseDown="DragMove_MousedounLogo"/>
             <TextBlock Grid.ColumnSpan="2" Grid.Row="0" 
-                       Text="Окно Расчета Вылпат" Margin="15"
+                       Text="Окно Расчета Выплат" Margin="15"
                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
                        FontSize="28" FontFamily="HelveticaNeueCyr"/>
          
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
-                    Grid.Column="3" Grid.RowSpan="3" Margin="5 5 5 60"
+                    Grid.Column="3" Grid.RowSpan="3" Margin="5"
                     Grid.Row="1" >
-                <StackPanel Orientation="Vertical">
+               
                     
 
                     <ListView MouseDoubleClick="MouseDoubleCLikPaymaentHuman" x:Name="PaymentHumanListView" ItemsSource="{Binding FiltredPaymentHumen}" Margin="5"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
@@ -64,62 +64,26 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                </StackPanel>
+               
 
             </Border>
-            <StackPanel Grid.Column="3" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                         Width="50" Height="50"  Margin="5" MouseDown="DeleteImage_MouseDouwn"
-                        VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon}"
-                                         Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image x:Name="DeleteIcon" Source="/Resusce/garbage.png" Margin="5"/>
-                </Border>
-                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
-                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewObjBorder_MouseDown" >
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon}"
-                                         Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image x:Name="AddIcon" Source="/Resusce/add-file.png" Margin="5"/>
-                </Border>
-            </StackPanel>
+            
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="2" Margin="5 55 5 0"
                     Grid.Row="0">
                 <StackPanel>
 
-                    <TextBlock Text="Выбрать дату:" Margin="3" 
+                    <TextBlock Text="Выбрать дату:" Margin="5" 
                                HorizontalAlignment="Left" 
                                FontSize="16" FontFamily="HelveticaNeueCyr" />
-
+                    <DatePicker Margin="15" x:Name="DatePickerSelectPaymentsFiltr" SelectedDateChanged="DatePickerSelectPaymentsFiltr_SelectedDateChanged" />
                 </StackPanel>
             </Border>
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="2" Grid.RowSpan="3" Margin="5"
                     Grid.Row="1">
 
-                <ListView MouseDoubleClick="MouseDubleClick_PaymetsListView" ItemsSource="{Binding FiltredPayments}" Margin="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListView x:Name="ListViewPayment" MouseDoubleClick="MouseDubleClick_PaymetsListView" ItemsSource="{Binding FiltredPayments}" Margin="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="40">
@@ -134,11 +98,11 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <TextBlock Grid.Column="1" Text="{Binding Date}" TextWrapping="Wrap"/>
+                                <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="Удалить" MouseDown="DeletePaymentTextBox"/> 
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
             </Border>
             <StackPanel Orientation="Horizontal"   Grid.ColumnSpan="4" 
                         VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5">
@@ -175,12 +139,6 @@
             </StackPanel>
             <Border Grid.Column="3" BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4" Margin="5 55 5 0" >
                 <StackPanel>
-                    <TextBlock Text="Фильтр" Margin="3" HorizontalAlignment="Left" 
-                       FontSize="16" FontFamily="HelveticaNeueCyr"/>
-                    <StackPanel Orientation="Horizontal" Margin="5 1 5 1">
-                        <ComboBox/>
-                        <ComboBox/>
-                    </StackPanel>
                     <TextBlock Text="Поиск" Margin="3" HorizontalAlignment="Left" 
                        FontSize="16" FontFamily="HelveticaNeueCyr"/>
                     <TextBox Margin="3"/>
@@ -193,17 +151,14 @@
                         <TextBlock Text="Выбранный клиент:"  FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
                         <TextBlock x:Name="NameTextBlock" Text="Имя" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  Text="Номер дома:" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
                         <TextBlock  x:Name="HomeTextBlock" Text="Дом" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
                         <TextBlock  Text="Номер квартиры" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
                         <TextBlock  x:Name="ApartemetsTextBlock" Text="Квартира" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
-
                         <TextBlock x:Name="PhoneNumberTextBlock" Text="Телефон" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="15 1 "/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-
                         <TextBlock x:Name="DiscriptionTextBLock" Text="Описание" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="1"/>
                     </StackPanel>
                 </StackPanel>
@@ -213,15 +168,15 @@
 
             <StackPanel Grid.Row="1" Grid.RowSpan="2"  Margin="5 70 5 15">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Первое слогаемое:" FontSize="16" FontFamily="HelveticaNeueCyr"/>
+                    <TextBlock Text="Сумма первой выплаты:" FontSize="16" FontFamily="HelveticaNeueCyr"/>
                     <TextBox x:Name="TextBoxOneSumm" Text="0" FontSize="16" FontFamily="HelveticaNeueCyr"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Второе слогаемое:" FontSize="16" FontFamily="HelveticaNeueCyr"/>
+                    <TextBlock Text="Сумма второй выплаты:" FontSize="16" FontFamily="HelveticaNeueCyr"/>
                     <TextBox x:Name="TextBoxTwoSumm" Text="0" FontSize="16" FontFamily="HelveticaNeueCyr"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Третье слогаемое:" FontSize="16" FontFamily="HelveticaNeueCyr"/>
+                    <TextBlock Text="Сумма третьей выплаты:" FontSize="16" FontFamily="HelveticaNeueCyr"/>
                     <TextBox x:Name="TextBoxThreeSumm" Text="0" FontSize="16" FontFamily="HelveticaNeueCyr"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="15">

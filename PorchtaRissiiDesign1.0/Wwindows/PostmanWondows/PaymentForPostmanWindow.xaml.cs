@@ -155,7 +155,10 @@ namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
 
             Payment item = (Payment)PaymentListView.SelectedValue;
             SelectedPayments.Add(item);
+            if (item == null)
+            {
 
+            }else if(item !=null)
             foreach (Payment pay in selectedPayments)
             {
                 CountCoins += (decimal)pay.CountAmount;

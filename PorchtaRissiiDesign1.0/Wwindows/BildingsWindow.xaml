@@ -65,49 +65,49 @@
                 <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4">
                     <StackPanel>
                         <TextBlock x:Name="TBlockFiltrHomes" Visibility="Visible" Text="Выберете участок" Margin="5 2" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
-                        <ComboBox x:Name="CboxFiltrHomes" Margin="5" Visibility="Visible"/>
+                        <ComboBox x:Name="CboxFiltrHomes" Margin="5" Visibility="Visible" SelectionChanged="CboxFiltrHomes_SelectionChanged" >
+                            <TextBlock Text="Участок №1"/>
+                            <TextBlock Text="Участок №2"/>
+                            <TextBlock Text="Участок №3"/>
+                        </ComboBox>
                         <TextBlock Text="Поиск" Margin="5 2" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}" />
                         <TextBox Margin="5" FontSize="16" Width="170" />
-
                     </StackPanel>
-
                 </Border>
             </StackPanel>
             <StackPanel Grid.Column="3" Margin="5"
                     Grid.Row="1" >
                 <TextBlock Text="Квартиры" FontSize="16" Foreground="Black" HorizontalAlignment="Center" Style="{StaticResource TBlockPostStyle}"/>
-                <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4" >
+                <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Margin="5 2" FontSize="16" Style="{StaticResource TBlockPostStyle}" Foreground="Black" Text="Сортировка"/>
-                    <StackPanel Orientation="Horizontal">
-                        <ComboBox Margin="5"  />
-                        <ComboBox Margin="5"/>
-                         
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Margin="5"/>
+                            <ComboBox Margin="5"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
-          
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="2" Margin="5"
                     Grid.Row="2">
-                <ListView ItemsSource="{Binding }" Margin="2">
+                <ListView x:Name="BuildingListView" ItemsSource="{Binding Buildings}" Margin="2" MouseDoubleClick="DubleclickBuinding_ListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                               
-                                
-                                
+                                <TextBlock Text="{Binding NumberBuilding}" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="5"/>
+                                <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Right" Text="Регион:" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="5" Grid.Column="1"/>
+                                <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" Text="{Binding IdRegion}" FontSize="16" FontFamily="HelveticaNeueCyr" Margin="5" Grid.Column="2"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-               
+
             </Border>
             <StackPanel x:Name="RedacktHomesStackPanel" Grid.Column="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
                 <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
@@ -149,7 +149,34 @@
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="3" Margin="5"
                     Grid.Row="2">
-            
+                <ListView ItemsSource="{Binding Apartments}" Margin="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical">
+                           
+                                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="3">
+                                    <TextBlock Text="Номер квартиры:" FontSize="16"  FontFamily="HelveticaNeueCyr"  />
+                                    <TextBlock Text="{Binding Number}"  FontSize="16"  FontFamily="HelveticaNeueCyr"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="3">
+                                    <TextBlock Text="Статус ящика:" FontSize="16"  FontFamily="HelveticaNeueCyr"/>
+                                    <TextBlock Text="{Binding IdStatusBoxNavigation.Status}"  FontSize="16"  FontFamily="HelveticaNeueCyr"/>
+                                </StackPanel>
+
+                                    
+                                </StackPanel>
+
+                            </Grid> 
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </Border>
             <StackPanel x:Name="RedacktApartStackPanel" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
                 <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
@@ -190,28 +217,26 @@
             </StackPanel>
 
             <Grid  Grid.RowSpan="3"  Grid.Row="0" Grid.ColumnSpan="2" >
-                   
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
-                    Grid.Column="0" Margin="15 40 15 2" Height="100" >
+                    Grid.Column="0" Margin="15 40 15 2">
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Margin="5 2" Text="Информация о жильце:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
-                        <TextBlock  Margin="5 2" Text="Выбериет квартиру" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <TextBlock Margin="5 2" Text="Информация о Доме:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <TextBlock  Margin="5 2" Text="Номер дома:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <TextBlock  Margin="5 2" x:Name="tblockBuildingNUmber" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <TextBlock  Margin="5 2" Text="Количество подьездов:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
+                        <TextBlock  Margin="5 2" x:Name="tblockCountDoorway" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
                     </StackPanel>
-                    
-                       
-              
-                   </Border>
+                </Border>
                 <Border Margin="15 3 15 5"  BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4" Grid.Row="2" >
                     <wv2:WebView2 Name="WebView" Margin="5"
                               Source="https://2gis.ru/smolensk"/>
-                        
                 </Border>
-                </Grid>
-           
+            </Grid>
         </Grid>
     </Border>
 </Window>

@@ -20,7 +20,7 @@ namespace PorchaAPI
         public int? CountBillTire5 { get; set; }
         public int? CountBillTire6 { get; set; }
         public int? CountBillTire7 { get; set; }
-        public int? CountCoins { get; set; }
+        public decimal? CountCoins { get; set; }
         public DateTime? Date { get; set; }
         public decimal? CountAmount { get; set; }
 

@@ -61,7 +61,7 @@
         <TextBlock x:Name="TextBlockLogin" Text="Логин" FontFamily="HelveticaNeueCyr" 
                    Grid.Row="1" Grid.Column="1" 
                    FontSize="28" Foreground="#FF676767"
-                   Margin="34 70 150 160"
+                   Margin="34 73 150 160"
                    IsHitTestVisible="False" 
                   >
             <TextBlock.Style>
@@ -83,24 +83,6 @@
                    Margin="34,128,130,90"
                    IsHitTestVisible="False"/>
 
-        <TextBlock x:Name="TBlockREgistration" FontFamily="HelveticaNeueCyr" 
-                   Text="Регистрация" FontWeight="Light" FontSize="22"
-                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                       Margin="0,0,0,40"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="Transparent"
-                       MouseDown="RegistrationTBlock">
-            <TextBlock.Style>
-                
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=TBlockREgistration}"
-                                     Value="true">
-                            <Setter Property="Foreground" Value="#FF945E3E"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style> 
-            </TextBlock.Style>
-        </TextBlock>
 
 
 

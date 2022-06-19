@@ -17,6 +17,9 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
     /// </summary>
     public partial class TasksWindow : Window, INotifyPropertyChanged
     {
+        private PorchaAPI.Task taskes;
+        private PorchaAPI.Task task;
+
         public TasksWindow(User postman)
         {
             Postman = postman;
@@ -80,6 +83,43 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         {
             var content = ((Image)sender).DataContext as PorchaAPI.Task;
             content.TextBoxVisibility = Visibility.Collapsed;
+        }
+        private async void AddNewTaskBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PorchaAPI.Task task = new PorchaAPI.Task
+            {
+                IdPostman = Postman.Id,
+                Priority = 1,
+                TextTask = "Нажмите что бы изменить",
+                DateTask = DateTime.Now,
+            };
+            await HttpRequest.PostAsync<bool>($"{adress}Home/addNewTast", task);
+
+            UpdateDate();
+        }   
+
+        private async void DeleteHomeImage_MouseDouwn(object sender, MouseButtonEventArgs e)
+        {
+            
+            PorchaAPI.Task task = (PorchaAPI.Task)lvTastItem.SelectedValue;
+            if (task != null)
+            {
+                try
+                {
+                    await HttpRequest.DeleteAsync<PorchaAPI.Task>($"{adress}Home/DeleteTask.id={task.Id}");
+                    MessageBox.Show("Объкт удален!");
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка, нечего не удалилось!");
+                }
+               
+              
+            }
+            else if (task == null)
+                MessageBox.Show("Задача для удаление не выбранна не выбрат");
+
+            UpdateDate();
         }
     }
 }

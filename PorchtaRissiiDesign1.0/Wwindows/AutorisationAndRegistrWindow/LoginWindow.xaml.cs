@@ -51,12 +51,7 @@ namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
             }
         }
 
-        private void RegistrationTBlock(object sender, MouseButtonEventArgs e)
-        {
-            RegistrationWindow Reg = new RegistrationWindow();
-            Reg.Show();
-            this.Close();
-        }
+    
 
 
         private async void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -110,7 +105,7 @@ namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
                 MessageBox.Show(errorMessage, "Ошика!");
             }
         }
-        
+
     }
 
 }

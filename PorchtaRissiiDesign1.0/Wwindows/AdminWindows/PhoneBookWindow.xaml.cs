@@ -1,4 +1,5 @@
 ﻿using PorchaAPI;
+using PorchtaRissiiDesign1._0.Wwindows.PageRedakt;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,7 +82,8 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
         private void AddNewObjBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            RedaktWindow RW = new RedaktWindow();
+            AddNewPBPage page  = new AddNewPBPage();
+            RedaktWindow RW = new RedaktWindow(page);
             RW.Show();
 
         }
