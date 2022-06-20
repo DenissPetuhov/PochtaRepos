@@ -112,7 +112,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         {
             RegistrationWindow Reg = new RegistrationWindow();
             Reg.Show();
-            this.Close();
+        
         }
     }
 }

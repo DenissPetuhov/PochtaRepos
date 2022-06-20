@@ -52,11 +52,15 @@
                                         <RowDefinition />
                                         <RowDefinition Height="5"/>
                                     </Grid.RowDefinitions>
-
-                                    <Image x:Name="asdadsfdass" Grid.Column="0" Grid.Row="1" Source="/Resusce/TaskIcon.png" Width="40" 
+                                    <StackPanel Grid.Column="0" Grid.Row="1"  Orientation="Vertical">
+                                        <Image x:Name="asdadsfdass" Source="/Resusce/TaskIcon.png" Width="40" 
                                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5"/>
-
-
+                                        <TextBlock Text="{}"/>
+                                    </StackPanel>
+                                   
+                                    
+                                    
+                                    
 
                                     <Button x:Name="TBlockTaskText"  Grid.Row="1" Grid.Column="1"   
                                             Width="220" Margin="3" 

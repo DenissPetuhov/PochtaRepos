@@ -35,7 +35,8 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
         private List<PaymentHuman> _paymentHuman;
         public List<PaymentHuman> PaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
-        public List<PaymentHuman> FiltredPaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
+        private List<PaymentHuman> _filtredPaymentHumen;
+        public List<PaymentHuman> FiltredPaymentHumen { get => _filtredPaymentHumen; set { _filtredPaymentHumen = value; OnPropertyChanged(); } }
 
         private List<Payment> payments;
         public List<Payment> AllPaymens
@@ -85,10 +86,21 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                 return null;
             }
         }
-       
+        public string _search;
+        public string SearchText { get => _search; set { _search = value; Search(); } }
+        private void Search()
+        {
+            FiltredPaymentHumen = PaymentHumen;
+
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+              return;
+            }
+            FiltredPaymentHumen = FiltredPaymentHumen.Where(s => s.Name.ToLower().Contains(SearchText.ToLower())).ToList();
+        }
         private void MouseDubleClick_PaymetsListView(object sender, MouseButtonEventArgs e)
         {
-             //Payment PaymentSelectitem = (Payment)ListViewPayment.SelectedValue;
+            //Payment PaymentSelectitem = (Payment)ListViewPayment.SelectedValue;
         }
 
 
@@ -96,40 +108,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
         public double sum2;
         public double sum3;
         public double allAmount;
-        private void SummCLickBtn(object sender, RoutedEventArgs e)
-        {
-            sum1 = 0;
-            sum2 = 0;
-            sum3 = 0;
-            allAmount = 0;
-            if (TextBoxOneSumm.Text != "")
-                sum1 += Convert.ToDouble(TextBoxOneSumm.Text);
-            else if (TextBoxTwoSumm.Text == "")
-                sum1 = 0;
 
-            if (TextBoxTwoSumm.Text != "")
-                sum2 += Convert.ToDouble(TextBoxTwoSumm.Text);
-            else if (TextBoxTwoSumm.Text == "")
-                sum2 = 0;
-
-            if (TextBoxThreeSumm.Text != "")
-                sum3 += Convert.ToDouble(TextBoxThreeSumm.Text);
-            else if (TextBoxThreeSumm.Text == "")
-                sum3 = 0;
-
-            allAmount = sum1 + sum2 + sum3;
-            TextBLockCountItog.Text = allAmount.ToString();
-            double[] billAgrs;
-            billAgrs = BilletCounter.BillCounts(allAmount); // Возарвщает масив от где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
-            TBBill5k.Text = ((int)billAgrs[0]).ToString();
-            TBBlii2k.Text = ((int)billAgrs[1]).ToString();
-            TBBill1k.Text = ((int)billAgrs[2]).ToString();
-            TBBill500.Text = ((int)billAgrs[3]).ToString();
-            TBBill200.Text = ((int)billAgrs[4]).ToString();
-            TBBill100.Text = ((int)billAgrs[5]).ToString();
-            TBBill50.Text = ((int)billAgrs[6]).ToString();
-            TBOSt.Text = Math.Round(billAgrs[7], 2).ToString();
-        }
         private void DragMove_MousedounLogo(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -140,14 +119,34 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
         private async void SaveDataBtn_click(object sender, RoutedEventArgs e)
         {
-            if (allAmount == 0)
-            {
-                MessageBox.Show("Выплата не расичтана");
-            }
-            else if (paymentHumanSelectItem != null)
+
+            if (paymentHumanSelectItem != null)
             {
                 try
                 {
+                    sum1 = 0;
+                    sum2 = 0;
+                    sum3 = 0;
+                    allAmount = 0;
+                    if (TextBoxOneSumm.Text != "")
+                        sum1 += Convert.ToDouble(TextBoxOneSumm.Text);
+                    else if (TextBoxTwoSumm.Text == "")
+                        sum1 = 0;
+
+                    if (TextBoxTwoSumm.Text != "")
+                        sum2 += Convert.ToDouble(TextBoxTwoSumm.Text);
+                    else if (TextBoxTwoSumm.Text == "")
+                        sum2 = 0;
+
+                    if (TextBoxThreeSumm.Text != "")
+                        sum3 += Convert.ToDouble(TextBoxThreeSumm.Text);
+                    else if (TextBoxThreeSumm.Text == "")
+                        sum3 = 0;
+
+                    allAmount = sum1 + sum2 + sum3;
+                    TextBLockCountItog.Text = allAmount.ToString();
+                    double[] billAgrs;
+                    billAgrs = BilletCounter.BillCounts(allAmount); // Возарвщает массив от где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
                     Payment paymentCount = new Payment
                     {
                         IdHuman = paymentHumanSelectItem.Id,
@@ -155,25 +154,26 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                         Amount2 = ((decimal)sum2),
                         Amount3 = ((decimal)sum3),
                         CountAmount = ((decimal)allAmount),
-                        CountBillTire1 = Convert.ToInt32(TBBill5k.Text),
-                        CountBillTire2 = Convert.ToInt32(TBBlii2k.Text),
-                        CountBillTire3 = Convert.ToInt32(TBBill1k.Text),
-                        CountBillTire4 = Convert.ToInt32(TBBill500.Text),
-                        CountBillTire5 = Convert.ToInt32(TBBill200.Text),
-                        CountBillTire6 = Convert.ToInt32(TBBill100.Text),
-                        CountBillTire7 = Convert.ToInt32(TBBill50.Text),
-                        CountCoins = Convert.ToDecimal(TBOSt.Text),
+                        CountBillTire1 = (int)billAgrs[0],
+                        CountBillTire2 = (int)billAgrs[1],
+                        CountBillTire3 = (int)billAgrs[2],
+                        CountBillTire4 = (int)billAgrs[3],
+                        CountBillTire5 = (int)billAgrs[4],
+                        CountBillTire6 = (int)billAgrs[5],
+                        CountBillTire7 = (int)billAgrs[6],
+                        CountCoins = (decimal)Math.Round(billAgrs[7], 2),
                         Date = DateTime.Now,
                     };
 
-                   
-                        await HttpRequest.PostAsync<bool>($"{adress}Home/addNewPayments", paymentCount);
-                        MessageBox.Show("успешно");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+
+
+                    await HttpRequest.PostAsync<bool>($"{adress}Home/addNewPayments", paymentCount);
+                    MessageBox.Show("успешно");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             UpdateDate();
             FiltredPayments = FiltrPay(paymentHumanSelectItem);
@@ -196,9 +196,19 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
         private void DatePickerSelectPaymentsFiltr_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            FiltredPayments = FiltrPay(paymentHumanSelectItem);
-            DateTime? date = DatePickerSelectPaymentsFiltr.SelectedDate;
-            FiltredPayments = FiltredPayments.Where(x => x.Date.Value.Date == date.Value.Date).ToList();
+            if(FiltredPayments != null)
+            {
+                FiltredPayments = FiltrPay(paymentHumanSelectItem);
+                DateTime? date = DatePickerSelectPaymentsFiltr.SelectedDate;
+                FiltredPayments = FiltredPayments.Where(x => x.Date.Value.Date == date.Value.Date).ToList();
+            }   
+        }
+
+      
+
+        private void CancelSearhc_Button(object sender, RoutedEventArgs e)
+        {
+         
         }
     }
 }

@@ -91,12 +91,16 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Vertical" Grid.Column="0">
+                                    <TextBlock Text="{Binding IdHumanNavigation.Name}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        
+                                  
+                                    <TextBlock Text="Квартира:" FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12"/>
                                     <TextBlock Text="{Binding IdHumanNavigation.IdApartamentNavigation.Number}"/>
-                                    <TextBlock Text="Квартира" FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12"/> 
-                                    <StackPanel Margin="3" Orientation="Horizontal">
-                                        <TextBlock Text="Дата:"/>
-                                        <TextBlock Text="{Binding Date}"/>
+                                    <TextBlock Text="Дома:" FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12"/>
+                                    <TextBlock Text="{Binding IdHumanNavigation.IdApartamentNavigation.IdBuildingNavigation.NumberBuilding}"/>
                                     </StackPanel>
+                                 
                                     <TextBlock Text="{Binding CountAmount}"/>
                                     <StackPanel  Orientation="Horizontal">
                                         <TextBlock FontFamily="HelveticaNeueCyr" Margin="1" FontSize="12" Text="{Binding CountBillTire1}"/>
