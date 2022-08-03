@@ -1,5 +1,5 @@
 ﻿using PorchaAPI;
-using PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow;
+using PochtaRossiiDesign1._0.AutorisationAndRegistrWindow;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
 
-namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
+namespace PochtaRossiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для AdminWindow.xaml
@@ -103,16 +103,32 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
             BFA.Show();
         }
 
-        private void RegionsIcon_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            CreateAndRedactRegionWindow CARRW= new CreateAndRedactRegionWindow();
-            CARRW.Show();
-        }
+   
         private void RegistrationTBlock(object sender, MouseButtonEventArgs e)
         {
             RegistrationWindow Reg = new RegistrationWindow();
             Reg.Show();
         
+        }
+
+        private async void DeletePostman_click(object sender, RoutedEventArgs e)
+        {
+            var parameter = ((Button)sender).DataContext;
+          
+            if (parameter is User postman)
+            {
+                MessageBoxResult result = MessageBox.Show($"Вы уверенны что хотите удалить пользователя {postman.Name}", "Подтверждите",
+                    MessageBoxButton.OKCancel);
+               
+                if (result == MessageBoxResult.OK)
+                {
+                    await HttpRequest.DeleteAsync<User>($"{adress}Home/DeletePostman.id={postman.Id}");
+                    DataUpdate();
+                }
+                  
+               
+
+            }
         }
     }
 }

@@ -15,9 +15,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
+namespace PochtaRossiiDesign1._0.Wwindows.PostmanWondows
 {
     /// <summary>
     /// Логика взаимодействия для PaymentForPostmanWindow.xaml
@@ -146,8 +146,10 @@ namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
         }
         private void MouseDubleClick_SelectedPaymetsListView(object sender, MouseButtonEventArgs e)
         {
-            Payment item = (Payment)PaymentListView.SelectedItem;
-            SelectedPayments.Remove(item);
+            
+            
+         
+
         }
 
         private void MouseDoubleCLikPaymaent(object sender, MouseButtonEventArgs e)
@@ -155,12 +157,34 @@ namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
 
             Payment item = (Payment)PaymentListView.SelectedValue;
             SelectedPayments.Add(item);
-            if (item == null)
-            {
+           if (item != null)
+                LoadBilet();
 
-            }else if(item !=null)
+
+        }
+        public void LoadBilet()
+        {
+            Bill5k = 0;
+            Bill2k = 0;
+            Bill1k = 0;
+            Bill500 = 0;
+            Bill200 = 0;
+            Bill100 = 0;
+            Bill50 = 0;
+            Ost = 0;
+            CountCoins = 0;
+            TBBill5k.Text = Bill5k.ToString();
+            TBBlii2k.Text = Bill2k.ToString();
+            TBBill1k.Text = Bill1k.ToString();
+            TBBill500.Text = Bill500.ToString();
+            TBBill200.Text = Bill200.ToString();
+            TBBill100.Text = Bill100.ToString();
+            TBBill50.Text = Bill50.ToString();
+            TBOSt.Text = Ost.ToString();
+            TextBLockCountItog.Text = CountCoins.ToString();
             foreach (Payment pay in selectedPayments)
             {
+
                 CountCoins += (decimal)pay.CountAmount;
                 Bill5k += (int)pay.CountBillTire1;
                 Bill2k += (int)pay.CountBillTire2;
@@ -181,7 +205,6 @@ namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
                 TextBLockCountItog.Text = CountCoins.ToString();
             }
         }
-
         private void Update_Refreshbutton(object sender, RoutedEventArgs e)
         {
             Bill5k = 0;
@@ -202,6 +225,33 @@ namespace PorchtaRissiiDesign1._0.Wwindows.PostmanWondows
             TBBill50.Text = Bill50.ToString();
             TBOSt.Text = Ost.ToString();
             TextBLockCountItog.Text = CountCoins.ToString();
+        }
+
+        private  void DataPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            DateTime? date = DataPicker.SelectedDate;
+         
+            Payments = Payments.Where(x => x.Date.Value.Date == date.Value.Date).ToList();
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+       
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var item = ((Button)sender).DataContext;
+            if (item is Payment man)
+                SelectedPayments.Remove(man);
+
+            LoadBilet();
+        }
+
+        private void Update_RefresListFiltrhbutton(object sender, MouseButtonEventArgs e)
+        {
+            UpdateDate();
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using PorchtaRissiiDesign1._0.Wwindows.PageRedakt;
+﻿using PochtaRossiiDesign1._0.Wwindows.PageRedakt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PochtaRossiiDesign1._0.Wwindows
 {
     /// <summary>
     /// Логика взаимодействия для RedaktWindow.xaml

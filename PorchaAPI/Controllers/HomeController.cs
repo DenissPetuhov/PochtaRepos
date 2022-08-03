@@ -26,11 +26,26 @@ namespace PorchaAPI.Controllers
         {
             return await db.Buildings.ToListAsync();
         }
-        [HttpGet("Apartaments")]
-        public async Task<List<Apartment>> GetApartaments()
+        [HttpGet("Apartaments.id={id}")]
+        public async Task<List<Apartment>> GetApartaments([FromRoute] int id)
         {
-            return await db.Apartments.Include(x => x.IdBuildingNavigation).ToListAsync();
+            return await db.Apartments.Include(y => y.IdStatusBoxNavigation).Include(b => b.IdBuildingNavigation).Where(x => x.IdBuilding == id).ToListAsync();
         }
+        [HttpGet("ApartamentsRegs.id={id}")]
+        public async Task<List<Apartment>> GetApartamentsReg([FromRoute] int id)
+        {
+            return await db.Apartments.Include(x => x.IdBuildingNavigation).Include(y => y.IdStatusBoxNavigation).Where(b => b.IdBuildingNavigation.IdRegion == id).ToListAsync();
+        }
+        [HttpPut("UpdateApartaments")]
+        public async Task<bool> PutApart([FromBody] Apartment aps)
+        {
+            db.Apartments.Update(aps);
+            await db.SaveChangesAsync();
+            return true;
+
+        }
+
+
         [HttpPost("PostUser")]
         public async Task<int> PostUser([FromBody] User user)
         {
@@ -60,7 +75,7 @@ namespace PorchaAPI.Controllers
         [HttpGet("Task")]
         public async Task<List<Task>> GetTasks()
         {
-            return await db.Tasks.ToListAsync();
+            return await db.Tasks.Include(x => x.StatusTaskNavigation).ToListAsync();
         }
         [HttpGet("PaymentHumans")]
         public async Task<List<PaymentHuman>> GetPaymentHuman()
@@ -106,12 +121,40 @@ namespace PorchaAPI.Controllers
             }
             return NotFound();
         }
+        [HttpDelete("DeletePostman.id={id}")]
+        public async Task<IActionResult> PostDeletePostman([FromRoute] int? id)
+        {
+            if (id != null)
+            {
+                User PB = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
+                if (PB != null)
+                {
+                    db.Users.Remove(PB);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+            }
+            return NotFound();
+        }
+        [HttpDelete("DeletePaument.id={id}")]
+        public async Task<IActionResult> PostDeletePayjent([FromRoute] int? id)
+        {
+            if (id != null)
+            {
+                Payment PB = await db.Payments.FirstOrDefaultAsync(p => p.Id == id);
+                if (PB != null)
+                {
+                    db.Payments.Remove(PB);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+            }
+            return NotFound();
+        }
 
         [HttpPut("ChangeTask")]
         public async Task<bool> PutTask([FromBody] Task task)
         {
-         
-           
                 db.Tasks.Update(task);
                 await db.SaveChangesAsync();
                 return true;

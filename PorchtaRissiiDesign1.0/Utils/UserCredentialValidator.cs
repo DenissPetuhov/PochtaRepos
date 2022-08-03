@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Utils
+namespace PochtaRossiiDesign1._0.Utils
 {
     internal class UserCredentialValidator
     {

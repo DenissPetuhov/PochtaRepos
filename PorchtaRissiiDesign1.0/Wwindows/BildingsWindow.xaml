@@ -1,9 +1,9 @@
-﻿<Window x:Class="PorchtaRissiiDesign1._0.Wwindows.BildingsWindow"
+﻿<Window x:Class="PochtaRossiiDesign1._0.Wwindows.BildingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PorchtaRissiiDesign1._0.Wwindows" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:local="clr-namespace:PochtaRossiiDesign1._0.Wwindows" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Height="950"
         Width="1300"
@@ -69,9 +69,9 @@
                             <TextBlock Text="Участок №1"/>
                             <TextBlock Text="Участок №2"/>
                             <TextBlock Text="Участок №3"/>
+                            <TextBlock Text="Все"/>
                         </ComboBox>
-                        <TextBlock Text="Поиск" Margin="5 2" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}" />
-                        <TextBox Margin="5" FontSize="16" Width="170" />
+                        
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -82,8 +82,11 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Margin="5 2" FontSize="16" Style="{StaticResource TBlockPostStyle}" Foreground="Black" Text="Сортировка"/>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox Margin="5"/>
-                            <ComboBox Margin="5"/>
+                            <ComboBox Margin="5" SelectedIndex="{Binding SelectedSort}">
+                                <TextBlock>По возрастнию</TextBlock>
+                                <TextBlock>По убыванию</TextBlock>
+                            </ComboBox>
+                            
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -109,112 +112,43 @@
                 </ListView>
 
             </Border>
-            <StackPanel x:Name="RedacktHomesStackPanel" Grid.Column="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
-                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                         Width="50" Height="50"  Margin="5" MouseDown="DeleteHomeImage_MouseDouwn"
-                        VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon}"
-                                         Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image x:Name="DeleteIcon" Source="/Resusce/garbage.png" Margin="5"/>
-                </Border>
-                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
-                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewHomeObjBorder_MouseDown" >
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon}"
-                                         Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image x:Name="AddIcon" Source="/Resusce/add-file.png" Margin="5"/>
-                </Border>
-            </StackPanel>
+           
             <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="3" Margin="5"
                     Grid.Row="2">
-                <ListView ItemsSource="{Binding Apartments}" Margin="2">
+                <ListView x:Name="ListViewApartaments" ItemsSource="{Binding Apartments}" Margin="2" MouseDoubleClick="ListViewApartament_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Vertical">
-                           
-                                <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="3">
-                                    <TextBlock Text="Номер квартиры:" FontSize="16"  FontFamily="HelveticaNeueCyr"  />
-                                    <TextBlock Text="{Binding Number}"  FontSize="16"  FontFamily="HelveticaNeueCyr"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="3">
-                                    <TextBlock Text="Статус ящика:" FontSize="16"  FontFamily="HelveticaNeueCyr"/>
-                                    <TextBlock Text="{Binding IdStatusBoxNavigation.Status}"  FontSize="16"  FontFamily="HelveticaNeueCyr"/>
-                                </StackPanel>
+                            <Border BorderBrush="#FF0055A5" BorderThickness="0 2 0 0">
+                                <Grid>
 
-                                    
-                                </StackPanel>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical">
 
-                            </Grid> 
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="3">
+                                            <TextBlock Text="Номер квартиры:" FontSize="16"  FontFamily="HelveticaNeueCyr"  />
+                                            <TextBlock Text="{Binding Number}"  FontSize="16"  FontFamily="HelveticaNeueCyr"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="3">
+                                            <TextBlock Text="Статус ящика:" FontSize="16"  FontFamily="HelveticaNeueCyr"/>
+                                            <TextBlock Text="{Binding IdStatusBoxNavigation.Status}"  FontSize="16"  FontFamily="HelveticaNeueCyr"/>
+                                        </StackPanel>
+
+
+                                    </StackPanel>
+
+                                </Grid>
+                            </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
             </Border>
-            <StackPanel x:Name="RedacktApartStackPanel" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
-                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                         Width="50" Height="50"  Margin="5" MouseDown="DeleteApartImage_MouseDouwn2"
-                        VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteIcon2}"
-                                         Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image x:Name="DeleteIcon2" Source="/Resusce/garbage.png" Margin="5"/>
-                </Border>
-                <Border BorderBrush="#FF0055A5" BorderThickness="4" CornerRadius="4"
-                        Grid.Column="1" Grid.Row="3" Width="50" Height="50"  Margin="5"
-                        VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="AddNewApartObjBorder_MouseDown2" >
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=AddIcon2}"
-                                         Value="true">
-                                    <Setter Property="Background" Value="#FF0055A5"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Image x:Name="AddIcon2" Source="/Resusce/add-file.png" Margin="5"/>
-                </Border>
-            </StackPanel>
+           
 
             <Grid  Grid.RowSpan="3"  Grid.Row="0" Grid.ColumnSpan="2" >
 
@@ -224,13 +158,32 @@
                 </Grid.RowDefinitions>
                 <Border BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4"
                     Grid.Column="0" Margin="15 40 15 2">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Margin="5 2" Text="Информация о Доме:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
                         <TextBlock  Margin="5 2" Text="Номер дома:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
                         <TextBlock  Margin="5 2" x:Name="tblockBuildingNUmber" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
                         <TextBlock  Margin="5 2" Text="Количество подьездов:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
                         <TextBlock  Margin="5 2" x:Name="tblockCountDoorway" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}"/>
-                    </StackPanel>
+                            </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Grid.Row="1" Margin="5 2" Text="Стутус ящика:" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}" />
+                            <TextBlock Grid.Row="1" Margin="5 2" x:Name="TbStatusBox" FontSize="16" Foreground="Black" Style="{StaticResource TBlockPostStyle}" />
+                            <ComboBox x:Name="CBoxStatus" Grid.Row="1" SelectionChanged="StatusBox_SelectChanged" >
+                                <TextBlock Text="хороший"/>
+                                <TextBlock Text="сломаный"/>
+                                <TextBlock Text="переполненный"/>
+                                <TextBlock Text="Старый"/>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                    </Grid>
                 </Border>
                 <Border Margin="15 3 15 5"  BorderBrush="#FF0055A5" BorderThickness="2" CornerRadius="4" Grid.Row="2" >
                     <wv2:WebView2 Name="WebView" Margin="5"

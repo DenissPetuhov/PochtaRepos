@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace PorchtaRissiiDesign1._0
+namespace PochtaRossiiDesign1._0
 {
     public class HttpRequest
     {

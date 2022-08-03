@@ -14,16 +14,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
 
-namespace PorchtaRissiiDesign1._0.Wwindows
+namespace PochtaRossiiDesign1._0.Wwindows
 {
     /// <summary>
     /// Логика взаимодействия для BildingsForAdminWindow.xaml
     /// </summary>
     public partial class BildingsWindow : Window, INotifyPropertyChanged
     {
+        private int selectedSort;
+        public int SelectedSort 
+        {
+            get => selectedSort;
+            set
+            {
+                selectedSort = value;
+                OnPropertyChanged();
+                SortNumber();
+            }
+        }
         public BildingsWindow(User user)
         {
             Useres = user;
@@ -32,10 +43,31 @@ namespace PorchtaRissiiDesign1._0.Wwindows
             {
                 CboxFiltrHomes.Visibility = Visibility.Collapsed;
                 TBlockFiltrHomes.Visibility = Visibility.Collapsed;
-                RedacktHomesStackPanel.Visibility = Visibility.Collapsed;
-                RedacktApartStackPanel.Visibility = Visibility.Collapsed;
+             
             }
             UpdateDate();
+        }
+
+        private void SortNumber()
+        {
+            if (Apartments == null)
+            {
+                MessageBox.Show("выберите дом!");
+            }
+            else
+            {
+
+                if (SelectedSort == 0)
+                {
+                    Apartments = Apartments.OrderBy(x => x.Number).ToList();
+                }
+                if (SelectedSort == 1)
+                {
+                    Apartments = Apartments.OrderByDescending(x => x.Number).ToList();
+                }
+            }
+          
+          
         }
 
         public async void UpdateDate()
@@ -44,8 +76,8 @@ namespace PorchtaRissiiDesign1._0.Wwindows
             {
                 Buildings = await HttpRequest.GetAsync<List<Building>>($"{adress}Home/Buildings");
                 Buildings = Buildings.Where(x => x.IdRegion==Useres.IdRegion).ToList();
-                Apartments = await HttpRequest.GetAsync<List<Apartment>>($"{adress}Home/Apartaments");
-                Apartments = Apartments.Where(x => x.IdBuildingNavigation.IdRegion == Useres.IdRegion).ToList();
+
+              
 
             }
             else if(Useres.IdRole == 2)
@@ -53,7 +85,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows
                 Buildings = await HttpRequest.GetAsync<List<Building>>($"{adress}Home/Buildings");
             }
            
-            Apartments = await HttpRequest.GetAsync<List<Apartment>>($"{adress}Home/Apartaments");
+           
         }
         private User useres;
 
@@ -132,16 +164,18 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         {
 
         }
-
+        Building SelectedBuiding;
         private async void DubleclickBuinding_ListView(object sender, MouseButtonEventArgs e)
         {
-            Apartments = await HttpRequest.GetAsync<List<Apartment>>($"{adress}Home/Apartaments");
-            var item = (Building)BuildingListView.SelectedValue;
-            Apartments = Apartments.Where(x => x.IdBuilding == item.BuildingId).ToList();// заполнение квартр по фильтру дома
-            Uri uri = new Uri(item.Url2Gis);//Создание ссылки для вебвью
+            Apartments = null;
+             SelectedBuiding = (Building)BuildingListView.SelectedValue;
+
+                Apartments = await HttpRequest.GetAsync<List<Apartment>>($"{adress}Home/Apartaments.id={SelectedBuiding.BuildingId}");
+
+            Uri uri = new Uri(SelectedBuiding.Url2Gis);//Создание ссылки для вебвью
             WebView.Source = uri;
-            tblockBuildingNUmber.Text = item.NumberBuilding;//заполнение бордера 
-            tblockCountDoorway.Text = item.DoorwayCount.ToString();
+            tblockBuildingNUmber.Text = SelectedBuiding.NumberBuilding;//заполнение бордера 
+            tblockCountDoorway.Text = SelectedBuiding.DoorwayCount.ToString();
 
         }
 
@@ -149,7 +183,66 @@ namespace PorchtaRissiiDesign1._0.Wwindows
         {
             Buildings = await HttpRequest.GetAsync<List<Building>>($"{adress}Home/Buildings");
             int index = CboxFiltrHomes.SelectedIndex + 1;
-            Buildings = Buildings.Where(x => x.IdRegion == index).ToList();
+            if (index != 4)
+                Buildings = Buildings.Where(x => x.IdRegion == index).ToList();
+            else if(index == 4)
+                Buildings = await HttpRequest.GetAsync<List<Building>>($"{adress}Home/Buildings");
+
+
+
+
+        }
+
+        private async void StatusBox_SelectChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int status =new int();
+          if(CBoxStatus.SelectedIndex == 0)
+            {
+                status = 1;
+
+            }else if(CBoxStatus.SelectedIndex == 1)
+            {
+                status = 2;
+            }
+            else if (CBoxStatus.SelectedIndex == 2)
+            {
+                status = 3;
+            }
+            else if (CBoxStatus.SelectedIndex == 3)
+            {
+                status = 4;
+            }
+            Apartment aptsss = new Apartment
+            {   ApartmentId = apsses.ApartmentId,
+                IdBuilding = apsses.IdBuilding,
+                Discript = apsses.Discript,
+                Number = apsses.Number,
+                PaymentHumans = apsses.PaymentHumans,
+                VilagerName = apsses.VilagerName,
+                IdPhoto = apsses.IdPhoto,
+                IdStatusBox = status,
+            };
+            try
+            {
+                await HttpRequest.PutAsync<bool>($"{adress}Home/UpdateApartaments", aptsss);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+                Apartments = await HttpRequest.GetAsync<List<Apartment>>($"{adress}Home/Apartaments.id={SelectedBuiding.BuildingId}");
+            
+        }
+        Apartment apsses = new Apartment();
+        private void ListViewApartament_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var apss = (Apartment)ListViewApartaments.SelectedValue;
+            TbStatusBox.Text = apss.IdStatusBoxNavigation.Status;
+            apsses = apss;
 
         }
     }

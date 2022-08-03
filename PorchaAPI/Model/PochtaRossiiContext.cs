@@ -19,12 +19,12 @@ namespace PorchaAPI
 
         public virtual DbSet<Apartment> Apartments { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
-      
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<PaymentHuman> PaymentHumans { get; set; }
         public virtual DbSet<PhoneBook> PhoneBooks { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<StatusTask> StatusTasks { get; set; }
         public virtual DbSet<StatusesBox> StatusesBoxes { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -46,8 +46,6 @@ namespace PorchaAPI
             {
                 entity.Property(e => e.Discript).HasMaxLength(50);
 
-            
-
                 entity.Property(e => e.Number).HasMaxLength(4);
 
                 entity.Property(e => e.VilagerName).HasMaxLength(50);
@@ -56,8 +54,6 @@ namespace PorchaAPI
                     .WithMany(p => p.Apartments)
                     .HasForeignKey(d => d.IdBuilding)
                     .HasConstraintName("FK_Apartments_Buildings");
-
-            
 
                 entity.HasOne(d => d.IdStatusBoxNavigation)
                     .WithMany(p => p.Apartments)
@@ -79,17 +75,19 @@ namespace PorchaAPI
                     .HasConstraintName("FK_Buildings_Regions");
             });
 
-         
-
             modelBuilder.Entity<Payment>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Amount1).HasColumnType("money");
+                entity.Property(e => e.Amount1).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.Amount2).HasColumnType("money");
+                entity.Property(e => e.Amount2).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.Amount3).HasColumnType("money");
+                entity.Property(e => e.Amount3).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CountAmount).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CountCoins).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
@@ -110,6 +108,8 @@ namespace PorchaAPI
                 entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.PayDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
                 entity.HasOne(d => d.IdApartamentNavigation)
                     .WithMany(p => p.PaymentHumans)
@@ -146,6 +146,17 @@ namespace PorchaAPI
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<StatusTask>(entity =>
+            {
+                entity.ToTable("StatusTask");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.StatusTask1)
+                    .HasMaxLength(50)
+                    .HasColumnName("StatusTask");
+            });
+
             modelBuilder.Entity<StatusesBox>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -165,6 +176,11 @@ namespace PorchaAPI
                     .WithMany(p => p.Tasks)
                     .HasForeignKey(d => d.IdPostman)
                     .HasConstraintName("FK_Tasks_Users");
+
+                entity.HasOne(d => d.StatusTaskNavigation)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(d => d.StatusTask)
+                    .HasConstraintName("FK_Tasks_StatusTask");
             });
 
             modelBuilder.Entity<User>(entity =>

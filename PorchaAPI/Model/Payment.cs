@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -22,9 +21,8 @@ namespace PorchaAPI
         public int? CountBillTire7 { get; set; }
         public decimal? CountCoins { get; set; }
         public DateTime? Date { get; set; }
-        
         public decimal? CountAmount { get; set; }
-      
+
         public virtual PaymentHuman IdHumanNavigation { get; set; }
     }
 }

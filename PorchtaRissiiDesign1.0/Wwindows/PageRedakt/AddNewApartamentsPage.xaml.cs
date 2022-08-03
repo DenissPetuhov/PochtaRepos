@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PorchtaRissiiDesign1._0.Wwindows.PageRedakt
+namespace PochtaRossiiDesign1._0.Wwindows.PageRedakt
 {
     /// <summary>
     /// Логика взаимодействия для AddNewApartamentsPage.xaml

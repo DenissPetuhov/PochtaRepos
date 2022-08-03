@@ -2,13 +2,13 @@
 using System.Windows;
 using System.Windows.Input;
 using PorchaAPI;
-using PorchtaRissiiDesign1._0.Utils;
-using PorchtaRissiiDesign1._0.Wwindows;
-using PorchtaRissiiDesign1._0.Wwindows.AdminWindows;
-using PorchtaRissiiDesign1._0.Wwindows.PostmanWondows;
-using static PorchtaRissiiDesign1._0.App;
+using PochtaRossiiDesign1._0.Utils;
+using PochtaRossiiDesign1._0.Wwindows;
+using PochtaRossiiDesign1._0.Wwindows.AdminWindows;
+using PochtaRossiiDesign1._0.Wwindows.PostmanWondows;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
+namespace PochtaRossiiDesign1._0.AutorisationAndRegistrWindow
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

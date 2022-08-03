@@ -6,14 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace PorchtaRissiiDesign1._0
+namespace PochtaRossiiDesign1._0
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
     public partial class App : Application
     {
-        public static string adress = "https://192.168.0.52:5001/"; 
+        public static string adress = "https://192.168.0.91:5001/"; 
     
     }
 }

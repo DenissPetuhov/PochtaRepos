@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PorchtaRissiiDesign1._0;
+using PochtaRossiiDesign1._0;
 using System.Collections.Generic;
 
 
@@ -13,7 +13,7 @@ namespace PorchaAPI
         }
 
         public int ApartmentId { get; set; }
-        public string Number { get; set; }
+        public int Number { get; set; }
         public string VilagerName { get; set; }
         public int? IdStatusBox { get; set; }
         public string Discript { get; set; }

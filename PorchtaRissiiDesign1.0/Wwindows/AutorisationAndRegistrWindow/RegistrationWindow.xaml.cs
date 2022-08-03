@@ -2,10 +2,10 @@
 using System.Windows;
 using System.Windows.Input;
 using PorchaAPI;
-using PorchtaRissiiDesign1._0.Utils;
-using static PorchtaRissiiDesign1._0.App;
+using PochtaRossiiDesign1._0.Utils;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.AutorisationAndRegistrWindow
+namespace PochtaRossiiDesign1._0.AutorisationAndRegistrWindow
 {
     /// <summary>
     /// Логика взаимодействия для RegistrationWindow.xaml

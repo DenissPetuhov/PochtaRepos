@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
+namespace PochtaRossiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для TasksWindow.xaml
@@ -92,6 +92,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                 Priority = 1,
                 TextTask = "Нажмите что бы изменить",
                 DateTask = DateTime.Now,
+                StatusTask = 2,
             };
             await HttpRequest.PostAsync<bool>($"{adress}Home/addNewTast", task);
 
@@ -107,7 +108,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                 try
                 {
                     await HttpRequest.DeleteAsync<PorchaAPI.Task>($"{adress}Home/DeleteTask.id={task.Id}");
-                    MessageBox.Show("Объкт удален!");
+                
                 }
                 catch
                 {

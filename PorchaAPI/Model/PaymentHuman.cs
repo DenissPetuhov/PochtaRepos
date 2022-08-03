@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -20,9 +19,7 @@ namespace PorchaAPI
         public DateTime? PayDate { get; set; }
         public string PhoneNumber { get; set; }
 
-      
         public virtual Apartment IdApartamentNavigation { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Payment> Payments { get; set; }
     }
 }

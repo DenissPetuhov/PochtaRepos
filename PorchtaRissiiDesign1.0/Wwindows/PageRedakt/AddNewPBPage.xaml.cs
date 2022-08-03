@@ -1,9 +1,9 @@
 ﻿using PorchaAPI;
 using System.Windows;
 using System.Windows.Controls;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows.PageRedakt
+namespace PochtaRossiiDesign1._0.Wwindows.PageRedakt
 {
     /// <summary>
     /// Логика взаимодействия для AddNewPBPage.xaml

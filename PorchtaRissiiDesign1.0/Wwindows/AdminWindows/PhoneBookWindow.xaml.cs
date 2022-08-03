@@ -1,5 +1,5 @@
 ﻿using PorchaAPI;
-using PorchtaRissiiDesign1._0.Wwindows.PageRedakt;
+using PochtaRossiiDesign1._0.Wwindows.PageRedakt;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,9 +7,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
-namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
+namespace PochtaRossiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для PhoneBook.xaml
@@ -68,7 +68,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                 }
                 catch (Exception )
                 {
-                    MessageBox.Show("Не кдалось удалить что то");
+                    MessageBox.Show("Не Удалось удалить что то");
                 }
 
             }

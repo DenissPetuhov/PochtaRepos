@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PorchtaRissiiDesign1._0.Utils
+namespace PochtaRossiiDesign1._0.Utils
 {
     internal class BilletCounter
     {

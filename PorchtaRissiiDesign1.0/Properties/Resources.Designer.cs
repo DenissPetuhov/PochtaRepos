@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PorchtaRissiiDesign1._0.Properties
+namespace PochtaRossiiDesign1._0.Properties
 {
 
 

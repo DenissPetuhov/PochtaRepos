@@ -1,6 +1,6 @@
 ﻿using PorchaAPI;
-using PorchtaRissiiDesign1._0.Utils;
-using PorchtaRissiiDesign1._0.Wwindows.PageRedakt;
+using PochtaRossiiDesign1._0.Utils;
+using PochtaRossiiDesign1._0.Wwindows.PageRedakt;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +9,10 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static PorchtaRissiiDesign1._0.App;
+using static PochtaRossiiDesign1._0.App;
 
 
-namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
+namespace PochtaRossiiDesign1._0.Wwindows.AdminWindows
 {
     /// <summary>
     /// Логика взаимодействия для PayMentWindow.xaml
@@ -35,6 +35,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
         private List<PaymentHuman> _paymentHuman;
         public List<PaymentHuman> PaymentHumen { get => _paymentHuman; set { _paymentHuman = value; OnPropertyChanged(); } }
+
         private List<PaymentHuman> _filtredPaymentHumen;
         public List<PaymentHuman> FiltredPaymentHumen { get => _filtredPaymentHumen; set { _filtredPaymentHumen = value; OnPropertyChanged(); } }
 
@@ -146,7 +147,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
                     allAmount = sum1 + sum2 + sum3;
                     TextBLockCountItog.Text = allAmount.ToString();
                     double[] billAgrs;
-                    billAgrs = BilletCounter.BillCounts(allAmount); // Возарвщает массив от где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
+                    billAgrs = BilletCounter.BillCounts(allAmount); // Возарвщает массив где 0 элемент это 5000 купюры а 50 - 6 элемент  а 7 элемент это остаток монет
                     Payment paymentCount = new Payment
                     {
                         IdHuman = paymentHumanSelectItem.Id,
@@ -168,7 +169,7 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
 
                     await HttpRequest.PostAsync<bool>($"{adress}Home/addNewPayments", paymentCount);
-                    MessageBox.Show("успешно");
+                  
                 }
                 catch (Exception ex)
                 {
@@ -189,9 +190,12 @@ namespace PorchtaRissiiDesign1._0.Wwindows.AdminWindows
 
         }
 
-        private void DeletePaymentTextBox(object sender, MouseButtonEventArgs e)
+        private async void DeletePaymentTextBox(object sender, MouseButtonEventArgs e)
         {
 
+            Payment pay = (Payment)ListViewPayment.SelectedValue;
+            if(pay !=null)
+            await HttpRequest.DeleteAsync<Payment>($"{adress}Home/DeletePaument.id={pay.Id}");
         }
 
         private void DatePickerSelectPaymentsFiltr_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
